@@ -1,10 +1,10 @@
 package component.rail;
 
-import ui.Box;
+import component.ComponentImages;
+import component.ComponentType;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.io.File;
+import java.util.Map;
 
 /**
  * @program: Gizmo
@@ -16,11 +16,14 @@ import java.io.File;
 public class StraightRail extends Rail {
   public StraightRail() {
     super();
+    setType(ComponentType.STRAIGHT_RAIL);
+    setLabel(new JLabel(ComponentImages.getImage(getType())));
   }
 
   @Override
-  public void init(Box box) {
-    setEntranceX(TOP);
-    setEntranceX(BOTTOM);
+  public void init(Map.Entry<Integer, Integer> box) {
+    super.init(box);
+    setEntranceX(LEFT);
+    setEntranceX(RIGHT);
   }
 }

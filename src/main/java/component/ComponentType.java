@@ -1,4 +1,4 @@
-package ui;
+package component;
 
 public enum ComponentType {
   BALL,
@@ -9,7 +9,8 @@ public enum ComponentType {
   RECTANGLE,
   CIRCLE,
   DAMPER,
-  NONE;
+  NONE,
+  SELECT;
 
   public static ComponentType getComponentType(String string) {
     switch (string) {
@@ -29,6 +30,8 @@ public enum ComponentType {
         return CIRCLE;
       case "DAMPER":
         return DAMPER;
+      case "SELECT":
+        return SELECT;
     }
     return NONE;
   }

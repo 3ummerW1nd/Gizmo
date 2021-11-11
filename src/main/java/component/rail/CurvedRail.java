@@ -1,10 +1,9 @@
 package component.rail;
 
-import ui.Box;
-
-import javax.imageio.ImageIO;
+import component.ComponentImages;
+import component.ComponentType;
 import javax.swing.*;
-import java.io.File;
+import java.util.Map;
 
 /**
  * @program: Gizmo
@@ -12,14 +11,16 @@ import java.io.File;
  * @author: 3ummerW1nd
  * @create: 2021-11-01 11:32
  **/
-
 public class CurvedRail extends Rail {
   public CurvedRail() {
     super();
+    setType(ComponentType.CURVED_RAIL);
+    setLabel(new JLabel(ComponentImages.getImage(getType())));
   }
 
   @Override
-  public void init(Box box) {
+  public void init(Map.Entry<Integer, Integer> box) {
+    super.init(box);
     setEntranceX(TOP);
     setEntranceX(LEFT);
   }

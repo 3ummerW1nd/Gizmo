@@ -5,6 +5,8 @@ import component.NormalComponent;
 import lombok.Data;
 import point.Point;
 
+import java.util.Map;
+
 /**
  * @program: Gizmo
  * @description: 轨道
@@ -16,13 +18,14 @@ public class Rail extends NormalComponent {
   static final byte LEFT = 0, TOP = 1, RIGHT = 2, BOTTOM = 3;
   private byte entranceX, entranceY;
 
-  public Rail() {
-    type = SQUARE;
-  }
-
   @Override
   public Point checkCollision(Ball ball) {
     return null;
+  }
+
+  @Override
+  public void init(Map.Entry<Integer, Integer> box) {
+    super.init(box);
   }
 
   @Override

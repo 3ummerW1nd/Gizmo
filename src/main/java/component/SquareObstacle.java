@@ -1,10 +1,8 @@
 package component;
 
-import java.io.File;
-import javax.imageio.ImageIO;
+import java.util.Map;
 import javax.swing.*;
 import point.Point;
-import ui.Box;
 
 /**
  * @program: Gizmo
@@ -14,8 +12,12 @@ import ui.Box;
  **/
 
 public class SquareObstacle extends NormalComponent {
+  private int sideLength;
+  private int upperLeftX;
+  private int upperLeftY;
   public SquareObstacle() {
-    type = SQUARE;
+    setType(ComponentType.RECTANGLE);
+    setLabel(new JLabel(ComponentImages.getImage(getType())));
   }
 
   @Override
@@ -24,5 +26,11 @@ public class SquareObstacle extends NormalComponent {
   }
 
   @Override
-  public void init(Box box) {}
+  public void init(Map.Entry<Integer, Integer> box) {
+    super.init(box);
+    sideLength = 30;
+    upperLeftX = box.getKey() * 30;
+    upperLeftY = box.getValue() * 30;
+    System.out.println(upperLeftX + " " + upperLeftY);
+  }
 }

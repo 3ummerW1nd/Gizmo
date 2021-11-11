@@ -1,10 +1,8 @@
 package component;
 
-import java.io.File;
-import javax.imageio.ImageIO;
+import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
-import ui.Box;
 
 /**
  * @program: Gizmo
@@ -17,19 +15,20 @@ import ui.Box;
 public class Ball extends Component {
   private int velocityX, velocityY;
   private int accelerationX, accelerationY;
+  private int centerX, centerY, radius;
   private Ball() {
-    type = CIRCLE;
+    super();
+    setType(ComponentType.BALL);
+    setLabel(new JLabel(ComponentImages.getImage(getType())));
   }
 
   @Override
-  public void init(Box box) {}
-
-  @Override
-  public void rotate() {}
-
-  @Override
-  public void zoomIn() {}
-
-  @Override
-  public void zoomOut() {}
+  public void init(Map.Entry<Integer, Integer> box) {
+    super.init(box);
+    accelerationY = 1; // TODO: 选取一个合理的加速度
+    radius = 15;
+    centerX = box.getKey() * 30 + 15;
+    centerY = box.getValue() * 30 + 15;
+    System.out.println(centerX + " " + centerY);
+  }
 }

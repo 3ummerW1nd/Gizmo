@@ -1,8 +1,10 @@
 package component;
 
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.swing.*;
-import ui.Box;
+import lombok.Data;
 
 /**
  * @program: Gizmo
@@ -10,19 +12,33 @@ import ui.Box;
  * @author: 3ummerW1nd
  * @create: 2021-10-31 19:19
  **/
-
+@Data
 public abstract class Component {
-  public static final int CIRCLE = 1;
-  public static final int TRIANGLE = 2;
-  public static final int SQUARE = 3;
-  public static final int SPECIAL = 4;
-  public int type;
+  private int angle;
+  private List<Map.Entry<Integer, Integer>> own;
+  private ComponentType type; //组件的类型
+  private JLabel label; //组件的图片
 
-  public abstract void init(Box box);
-  public abstract void rotate();
-  public abstract void zoomIn();
-  public abstract void zoomOut();
+  Component() {
+    own = new ArrayList<>();
+    angle = 0;
+  }
 
+  public void init(Map.Entry<Integer, Integer> box) {
+    label.setSize(30, 30);
+    label.setLocation((box.getKey() + 1) * 30, (box.getValue() + 1) * 30);
+    own.add(box);
+  }
+  public void rotate() {
+    angle = (angle + 1) % 4;
+    label.setIcon(ComponentImages.getAngleImage(type, angle));
+  }
+  public void zoomIn() {
+    // TODO:实现组件的放大
+  }
+  public void zoomOut() {
+    // TODO:实现组件的缩小
+  }
   public void remove() {
     // TODO:实现组件的删除
   }

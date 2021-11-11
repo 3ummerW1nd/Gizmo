@@ -1,12 +1,8 @@
 package component;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
+import java.util.Map;
 import javax.swing.*;
 import point.Point;
-import ui.Box;
 
 /**
  * @program: Gizmo
@@ -17,7 +13,8 @@ import ui.Box;
 
 public class TriangleObstacle extends NormalComponent {
   public TriangleObstacle() {
-    type = TRIANGLE;
+    setType(ComponentType.TRIANGLE);
+    setLabel(new JLabel(ComponentImages.getImage(getType())));
   }
 
   @Override
@@ -26,5 +23,7 @@ public class TriangleObstacle extends NormalComponent {
   }
 
   @Override
-  public void init(Box box) {}
+  public void init(Map.Entry<Integer, Integer> box) {
+    super.init(box);
+  }
 }

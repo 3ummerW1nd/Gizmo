@@ -1,12 +1,9 @@
 package component;
 
-import component.Ball;
-import component.NormalComponent;
-import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import point.Point;
-import ui.Box;
+
+import java.util.Map;
 
 /**
  * @program: Gizmo
@@ -17,11 +14,16 @@ import ui.Box;
 
 public class CircleObstacle extends NormalComponent {
   public CircleObstacle() {
-    type = CIRCLE;
+    setType(ComponentType.CIRCLE);
+    setLabel(new JLabel(ComponentImages.getImage(getType())));
   }
 
   @Override
   public Point checkCollision(Ball ball) {
     return null;
+  }
+  @Override
+  public void init(Map.Entry<Integer, Integer> box) {
+    super.init(box);
   }
 }

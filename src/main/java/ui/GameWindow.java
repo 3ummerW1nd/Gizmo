@@ -1,10 +1,12 @@
 package ui;
 
+import static java.awt.event.MouseEvent.BUTTON3;
+
+import component.ComponentType;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Map;
 import javax.swing.*;
-
-import static java.awt.event.MouseEvent.BUTTON3;
 
 /**
  * @program: Gizmo
@@ -36,6 +38,10 @@ public class GameWindow extends JFrame {
   }
 
   private void addListeners() {
+    settingPanel.getSavingButton().addActionListener(e
+        -> {
+
+        });
     settingPanel.getReadingButton().addActionListener(e
         -> {
 
@@ -48,33 +54,24 @@ public class GameWindow extends JFrame {
       model = SETTING_MODEL;
       settingPanel.setModel(SETTING_MODEL);
     });
-    settingPanel.getRemoveButton().addActionListener(e
-        -> {
-
-        });
-    settingPanel.getRotateButton().addActionListener(e
-        -> {
-
-        });
-    settingPanel.getZoomInButton().addActionListener(e
-        -> {
-
-        });
-    settingPanel.getZoomOutButton().addActionListener(e
-        -> {
-
-        });
+    settingPanel.getRemoveButton().addActionListener(e -> { gamePanel.removeSelectComponent(); });
+    settingPanel.getRotateButton().addActionListener(e -> { gamePanel.rotateSelectComponent(); });
+    settingPanel.getZoomInButton().addActionListener(e -> { gamePanel.zoomInSelectComponent(); });
+    settingPanel.getZoomOutButton().addActionListener(e -> { gamePanel.zoomOutSelectComponent(); });
     gamePanel.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if(model == SETTING_MODEL) {
-          if(e.getButton() == BUTTON3) {
-            System.out.println("右击");
+        Map.Entry<Integer, Integer> box = gamePanel.checkBox(e.getX(), e.getY());
+        if (model == SETTING_MODEL) {
+          ComponentType tmp = settingPanel.getSelectedComponent();
+          if (tmp == ComponentType.NONE)
+            return;
+          else if (tmp == ComponentType.SELECT) {
+            gamePanel.setSelectedComponent(box);
           } else {
-            Box box = gamePanel.checkBox(e.getX(), e.getY());
-            gamePanel.putComponent(box, settingPanel.getSelectedComponent());
-            System.out.println(box.getX() + " " + box.getY());
+            gamePanel.putComponent(box, tmp);
+            System.out.println(box.getKey() + " " + box.getValue());
             System.out.println(settingPanel.getSelectedComponent());
           }
         }

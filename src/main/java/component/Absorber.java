@@ -1,10 +1,9 @@
 package component;
 
-import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import point.Point;
-import ui.Box;
+
+import java.util.Map;
 
 /**
  * @program: Gizmo
@@ -15,7 +14,13 @@ import ui.Box;
 
 public class Absorber extends NormalComponent {
   public Absorber() {
-    type = CIRCLE;
+    setType(ComponentType.ABSORBER);
+    setLabel(new JLabel(ComponentImages.getImage(getType())));
+  }
+
+  @Override
+  public void init(Map.Entry<Integer, Integer> box) {
+    super.init(box);
   }
 
   @Override

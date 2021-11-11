@@ -1,11 +1,9 @@
 package component;
 
-import java.io.File;
-import javax.imageio.ImageIO;
+import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
 import point.Point;
-import ui.Box;
 
 /**
  * @program: Gizmo
@@ -18,11 +16,13 @@ public class Damper extends Component {
   private Point Center;
   private int length;
   private Damper() {
-    type = SPECIAL;
+    setType(ComponentType.DAMPER);
+    setLabel(new JLabel(ComponentImages.getImage(getType())));
   }
 
   @Override
-  public void init(Box box) {}
+  public void init(Map.Entry<Integer, Integer> box) {
+  }
 
   @Override
   public void rotate() {}
