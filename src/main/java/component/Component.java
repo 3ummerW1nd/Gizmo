@@ -14,6 +14,7 @@ import lombok.Data;
  **/
 @Data
 public abstract class Component {
+  private int size;
   private int angle;
   private List<Map.Entry<Integer, Integer>> own;
   private ComponentType type; //组件的类型
@@ -22,6 +23,7 @@ public abstract class Component {
   Component() {
     own = new ArrayList<>();
     angle = 0;
+    size = 1;
   }
 
   public void init(Map.Entry<Integer, Integer> box) {
@@ -35,9 +37,15 @@ public abstract class Component {
   }
   public void zoomIn() {
     // TODO:实现组件的放大
+    size ++;
+    Map.Entry<Integer, Integer> initBox = own.get(0);
+    int initX = initBox.getKey();
+    int initY = initBox.getValue();
+
   }
   public void zoomOut() {
     // TODO:实现组件的缩小
+    size --;
   }
   public void remove() {
     // TODO:实现组件的删除

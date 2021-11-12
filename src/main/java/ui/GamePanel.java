@@ -100,8 +100,6 @@ public class GamePanel extends JPanel {
     component.init(box);
     locations.put(box, component);
     JLabel jLabel = component.getLabel();
-    jLabel.setSize(30, 30);
-    jLabel.setLocation((box.getKey() + 1) * 30, (box.getValue() + 1) * 30);
     add(jLabel);
     repaint();
   }
@@ -126,7 +124,13 @@ public class GamePanel extends JPanel {
     repaint();
   }
 
-  public void zoomInSelectComponent() {}
+  public void zoomInSelectComponent() {
+    selectedComponent.zoomIn();
+    repaint();
+  }
 
-  public void zoomOutSelectComponent() {}
+  public void zoomOutSelectComponent() {
+    selectedComponent.zoomOut();
+    repaint();
+  }
 }

@@ -38,11 +38,11 @@ public class GameWindow extends JFrame {
   private void addListeners() {
     settingPanel.getSavingButton().addActionListener(e
         -> {
-
+          // TODO 保存当前地图的操作
         });
     settingPanel.getReadingButton().addActionListener(e
         -> {
-
+          // TODO 从文件系统中读取地图
         });
     settingPanel.getPlayingModelButton().addActionListener(e -> {
       model = PLAYING_MODEL;
@@ -63,11 +63,10 @@ public class GameWindow extends JFrame {
         Map.Entry<Integer, Integer> box = gamePanel.checkBox(e.getX(), e.getY());
         if (model == SETTING_MODEL) {
           ComponentType tmp = settingPanel.getSelectedComponent();
-          if (tmp == ComponentType.NONE)
-            return;
-          else if (tmp == ComponentType.SELECT) {
+
+          if (tmp == ComponentType.SELECT) {
             gamePanel.setSelectedComponent(box);
-          } else {
+          } else if(tmp != ComponentType.NONE){
             gamePanel.putComponent(box, tmp);
             System.out.println(box.getKey() + " " + box.getValue());
             System.out.println(settingPanel.getSelectedComponent());
