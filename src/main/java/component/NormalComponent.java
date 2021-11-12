@@ -1,7 +1,7 @@
 package component;
 
-import point.Point;
+import pair.Pair;
 
 public abstract class NormalComponent extends Component {
-  public abstract Point checkCollision(Ball ball);
+  public abstract Pair checkCollision(Ball ball);
 }

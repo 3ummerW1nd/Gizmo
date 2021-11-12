@@ -3,7 +3,7 @@ package component;
 import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
-import point.Point;
+import pair.Pair;
 
 /**
  * @program: Gizmo
@@ -13,7 +13,7 @@ import point.Point;
  **/
 @Data
 public class Damper extends Component {
-  private Point Center;
+  private Pair Center;
   private int length;
 
   private Damper() {
