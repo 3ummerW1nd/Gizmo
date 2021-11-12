@@ -1,7 +1,5 @@
 package ui;
 
-import static java.awt.event.MouseEvent.BUTTON3;
-
 import component.ComponentType;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
