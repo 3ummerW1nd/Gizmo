@@ -1,6 +1,5 @@
 package component;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +15,7 @@ import javax.swing.*;
 
 public class ComponentImages {
   private static Map<ComponentType, List<ImageIcon>> images;
+
   static {
     images = new HashMap<>();
     List<ImageIcon> ballImages = new ArrayList<>();

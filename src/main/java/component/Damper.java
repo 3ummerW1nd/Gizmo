@@ -15,14 +15,14 @@ import point.Point;
 public class Damper extends Component {
   private Point Center;
   private int length;
+
   private Damper() {
     setType(ComponentType.DAMPER);
     setLabel(new JLabel(ComponentImages.getImage(getType())));
   }
 
   @Override
-  public void init(Map.Entry<Integer, Integer> box) {
-  }
+  public void init(Map.Entry<Integer, Integer> box) {}
 
   @Override
   public void rotate() {}

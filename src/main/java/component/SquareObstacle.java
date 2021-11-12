@@ -15,6 +15,7 @@ public class SquareObstacle extends NormalComponent {
   private int sideLength;
   private int upperLeftX;
   private int upperLeftY;
+
   public SquareObstacle() {
     setType(ComponentType.RECTANGLE);
     setLabel(new JLabel(ComponentImages.getImage(getType())));

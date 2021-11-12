@@ -29,16 +29,20 @@ public abstract class Component {
     label.setLocation((box.getKey() + 1) * 30, (box.getValue() + 1) * 30);
     own.add(box);
   }
+
   public void rotate() {
     angle = (angle + 1) % 4;
     label.setIcon(ComponentImages.getAngleImage(type, angle));
   }
+
   public void zoomIn() {
     // TODO:实现组件的放大
   }
+
   public void zoomOut() {
     // TODO:实现组件的缩小
   }
+
   public void remove() {
     // TODO:实现组件的删除
   }

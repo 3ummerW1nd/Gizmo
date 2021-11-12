@@ -36,6 +36,16 @@ public class SettingPanel extends JPanel {
   private JLabel playingModelLabel;
   private JLabel settingModelLabel;
 
+  public SettingPanel() {
+    setLayout(null);
+    initButtons();
+    initRadioButtons();
+    initLabels();
+    add(settingModelLabel);
+    add(playingModelLabel);
+    setSize(350, 680);
+  }
+
   public ButtonGroup getAllRadioButtons() {
     return allRadioButtons;
   }
@@ -70,16 +80,6 @@ public class SettingPanel extends JPanel {
 
   public JButton getZoomInButton() {
     return zoomInButton;
-  }
-
-  public SettingPanel() {
-    setLayout(null);
-    initButtons();
-    initRadioButtons();
-    initLabels();
-    add(settingModelLabel);
-    add(playingModelLabel);
-    setSize(350, 680);
   }
 
   public void setModel(int model) {

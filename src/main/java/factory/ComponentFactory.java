@@ -1,8 +1,8 @@
 package factory;
 
-import component.NormalComponent;
 import component.Ball;
 import component.Damper;
+import component.NormalComponent;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ public class ComponentFactory {
   private static Ball ball;
   private static List<Damper> damperList = new ArrayList<>();
   private static int countOfDamper = 0;
+
   static {
     try {
       Class<?> ballClass = Class.forName(Ball.class.getName());

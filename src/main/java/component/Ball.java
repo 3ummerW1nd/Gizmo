@@ -16,6 +16,7 @@ public class Ball extends Component {
   private int velocityX, velocityY;
   private int accelerationX, accelerationY;
   private int centerX, centerY, radius;
+
   private Ball() {
     super();
     setType(ComponentType.BALL);

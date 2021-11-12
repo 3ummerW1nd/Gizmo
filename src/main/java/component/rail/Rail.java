@@ -2,10 +2,9 @@ package component.rail;
 
 import component.Ball;
 import component.NormalComponent;
+import java.util.Map;
 import lombok.Data;
 import point.Point;
-
-import java.util.Map;
 
 /**
  * @program: Gizmo

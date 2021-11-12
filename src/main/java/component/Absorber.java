@@ -1,9 +1,8 @@
 package component;
 
+import java.util.Map;
 import javax.swing.*;
 import point.Point;
-
-import java.util.Map;
 
 /**
  * @program: Gizmo

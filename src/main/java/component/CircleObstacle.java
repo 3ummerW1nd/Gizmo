@@ -1,9 +1,8 @@
 package component;
 
+import java.util.Map;
 import javax.swing.*;
 import point.Point;
-
-import java.util.Map;
 
 /**
  * @program: Gizmo
@@ -22,6 +21,7 @@ public class CircleObstacle extends NormalComponent {
   public Point checkCollision(Ball ball) {
     return null;
   }
+
   @Override
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
