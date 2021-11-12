@@ -1,10 +1,13 @@
 package component;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -15,29 +18,31 @@ import javax.swing.*;
  **/
 
 public class ComponentImages {
-  private static Map<ComponentType, List<ImageIcon>> images;
+  private static Map<ComponentType, List<Image>> images;
   static {
     images = new HashMap<>();
-    List<ImageIcon> ballImages = new ArrayList<>();
-    List<ImageIcon> absorberImages = new ArrayList<>();
-    List<ImageIcon> triangleImages = new ArrayList<>();
-    List<ImageIcon> squareImages = new ArrayList<>();
-    List<ImageIcon> curvedRailImages = new ArrayList<>();
-    List<ImageIcon> straightRailImages = new ArrayList<>();
-    List<ImageIcon> damperImages = new ArrayList<>();
-    new ImageIcon("src/main/resources/damper.png");
-    List<ImageIcon> circleImages = new ArrayList<>();
-    new ImageIcon("src/main/resources/circle0.png");
-    for (int i = 0; i < 4; i++) {
-      ballImages.add(new ImageIcon("src/main/resources/ball" + i + ".png"));
-      absorberImages.add(new ImageIcon("src/main/resources/absorber" + i + ".png"));
-      triangleImages.add(new ImageIcon("src/main/resources/triangle" + i + ".png"));
-      squareImages.add(new ImageIcon("src/main/resources/rectangle" + i + ".png"));
-      curvedRailImages.add(new ImageIcon("src/main/resources/curvedRail" + i + ".png"));
-      straightRailImages.add(new ImageIcon("src/main/resources/straightRail" + i + ".png"));
-      circleImages.add(new ImageIcon("src/main/resources/circle" + i + ".png"));
+    List<Image> ballImages = new ArrayList<>();
+    List<Image> absorberImages = new ArrayList<>();
+    List<Image> triangleImages = new ArrayList<>();
+    List<Image> squareImages = new ArrayList<>();
+    List<Image> curvedRailImages = new ArrayList<>();
+    List<Image> straightRailImages = new ArrayList<>();
+    List<Image> damperImages = new ArrayList<>();
+    List<Image> circleImages = new ArrayList<>();
+    try {
+      for (int i = 0; i < 4; i++) {
+          ballImages.add(ImageIO.read(new File("src/main/resources/ball" + i + ".png")));
+          absorberImages.add(ImageIO.read(new File("src/main/resources/absorber" + i + ".png")));
+          triangleImages.add(ImageIO.read(new File("src/main/resources/triangle" + i + ".png")));
+          squareImages.add(ImageIO.read(new File("src/main/resources/rectangle" + i + ".png")));
+          curvedRailImages.add(ImageIO.read(new File("src/main/resources/curvedRail" + i + ".png")));
+          straightRailImages.add(ImageIO.read(new File("src/main/resources/straightRail" + i + ".png")));
+          circleImages.add(ImageIO.read(new File("src/main/resources/circle" + i + ".png")));
+      }
+      damperImages.add(ImageIO.read(new File("src/main/resources/damper.png")));
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-    damperImages.add(new ImageIcon("src/main/resources/damper.png"));
     images.put(ComponentType.BALL, ballImages);
     images.put(ComponentType.ABSORBER, absorberImages);
     images.put(ComponentType.TRIANGLE, triangleImages);
@@ -48,11 +53,13 @@ public class ComponentImages {
     images.put(ComponentType.DAMPER, damperImages);
   }
 
-  public static ImageIcon getAngleImage(ComponentType componentType, int angle) {
-    return images.get(componentType).get(angle);
+  public static ImageIcon getAngleImage(ComponentType componentType, int angle, int size) {
+    Image image = images.get(componentType).get(angle).getScaledInstance(size*30, size * 30, Image.SCALE_SMOOTH);
+    return new ImageIcon(image);
   }
 
   public static ImageIcon getImage(ComponentType componentType) {
-    return images.get(componentType).get(0);
+    Image image = images.get(componentType).get(0).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+    return new ImageIcon(image);
   }
 }
