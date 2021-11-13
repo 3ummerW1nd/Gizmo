@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import ui.GameWindow;
 
 /**
@@ -11,12 +10,9 @@ import ui.GameWindow;
 
 public class Main {
   public static void main(String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
-      @Override
-      public void run() {
-        GameWindow gameWindow = new GameWindow();
-        gameWindow.initGameWindow();
-      }
+    SwingUtilities.invokeLater(() -> {
+      GameWindow gameWindow = new GameWindow();
+      gameWindow.initGameWindow();
     });
   }
 }

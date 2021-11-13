@@ -2,7 +2,6 @@ package component.rail;
 
 import component.Ball;
 import component.Component;
-import component.ComponentImages;
 import component.NormalComponent;
 import java.util.Map;
 import lombok.Data;

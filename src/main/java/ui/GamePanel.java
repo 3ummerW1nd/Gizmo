@@ -4,13 +4,13 @@ import component.*;
 import component.Component;
 import component.rail.CurvedRail;
 import component.rail.StraightRail;
-import utils.ComponentFactory;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.*;
+import utils.ComponentFactory;
 
 /**
  * @program: Gizmo

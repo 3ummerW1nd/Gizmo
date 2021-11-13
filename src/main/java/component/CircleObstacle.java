@@ -2,7 +2,7 @@ package component;
 
 import java.util.Map;
 import javax.swing.*;
-import point.Point;
+import pair.Pair;
 
 /**
  * @program: Gizmo
@@ -18,9 +18,10 @@ public class CircleObstacle extends NormalComponent {
   }
 
   @Override
-  public Point checkCollision(Ball ball) {
+  public Pair checkCollision(Ball ball) {
     return null;
   }
+
   @Override
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);

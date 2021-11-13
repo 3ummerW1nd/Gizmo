@@ -19,6 +19,7 @@ import javax.swing.*;
 
 public class ComponentImages {
   private static Map<ComponentType, List<Image>> images;
+
   static {
     images = new HashMap<>();
     List<Image> ballImages = new ArrayList<>();
