@@ -2,7 +2,7 @@ package component;
 
 import java.util.Map;
 import javax.swing.*;
-import pair.Pair;
+import point.Point;
 
 /**
  * @program: Gizmo
@@ -23,7 +23,17 @@ public class Absorber extends NormalComponent {
   }
 
   @Override
-  public Pair checkCollision(Ball ball) {
+  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomIn(locations);
+  }
+
+  @Override
+  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomOut(locations);
+  }
+
+  @Override
+  public Point checkCollision(Ball ball) {
     return null;
   }
 }

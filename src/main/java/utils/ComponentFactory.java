@@ -1,4 +1,4 @@
-package factory;
+package utils;
 
 import component.Ball;
 import component.Damper;

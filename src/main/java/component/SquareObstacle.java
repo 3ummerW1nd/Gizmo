@@ -32,4 +32,24 @@ public class SquareObstacle extends NormalComponent {
     upperLeft.setX(box.getKey() * 30);
     upperLeft.setY(box.getValue() * 30);
   }
+
+  @Override
+  public void rotate(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.rotate(locations);
+  }
+
+  @Override
+  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomIn(locations);
+  }
+
+  @Override
+  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomOut(locations);
+  }
+
+  @Override
+  public void remove(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.remove(locations);
+  }
 }

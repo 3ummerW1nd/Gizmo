@@ -1,10 +1,10 @@
 package component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
+import utils.ComponentUtil;
 
 /**
  * @program: Gizmo
@@ -14,36 +14,36 @@ import lombok.Data;
  **/
 @Data
 public abstract class Component {
+  private int size;
   private int angle;
-  private List<Map.Entry<Integer, Integer>> own;
+  private Map.Entry<Integer, Integer> init;
   private ComponentType type; //组件的类型
   private JLabel label; //组件的图片
 
-  Component() {
-    own = new ArrayList<>();
-    angle = 0;
-  }
+  Component() {}
 
   public void init(Map.Entry<Integer, Integer> box) {
+    angle = 0;
+    size = 1;
     label.setSize(30, 30);
+    label.setIcon(ComponentImages.getAngleImage(type, angle, size));
     label.setLocation((box.getKey() + 1) * 30, (box.getValue() + 1) * 30);
-    own.add(box);
+    init = box;
   }
 
-  public void rotate() {
-    angle = (angle + 1) % 4;
-    label.setIcon(ComponentImages.getAngleImage(type, angle));
+  public void rotate(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    ComponentUtil.rotateComponent(this, locations);
   }
 
-  public void zoomIn() {
-    // TODO:实现组件的放大
+  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    ComponentUtil.zoomInComponent(this, locations);
   }
 
-  public void zoomOut() {
-    // TODO:实现组件的缩小
+  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    ComponentUtil.zoomOutComponent(this, locations);
   }
 
-  public void remove() {
-    // TODO:实现组件的删除
+  public void remove(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    ComponentUtil.removeComponent(this, locations);
   }
 }

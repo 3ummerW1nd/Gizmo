@@ -4,7 +4,7 @@ import component.*;
 import component.Component;
 import component.rail.CurvedRail;
 import component.rail.StraightRail;
-import factory.ComponentFactory;
+import utils.ComponentFactory;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,33 +102,41 @@ public class GamePanel extends JPanel {
     component.init(box);
     locations.put(box, component);
     JLabel jLabel = component.getLabel();
-    jLabel.setSize(30, 30);
-    jLabel.setLocation((box.getKey() + 1) * 30, (box.getValue() + 1) * 30);
     add(jLabel);
     repaint();
   }
 
   private void deleteComponent(Component component) {
-    List<Map.Entry<Integer, Integer>> list = component.getOwn();
-    for (Map.Entry<Integer, Integer> m : list) {
-      locations.remove(m);
-      System.out.println(m);
-    }
-    component.remove();
+    component.remove(locations);
     remove(component.getLabel());
     repaint();
   }
 
   public void removeSelectComponent() {
+    if (selectedComponent == null)
+      return;
     deleteComponent(selectedComponent);
+    selectedComponent = null;
   }
 
   public void rotateSelectComponent() {
-    selectedComponent.rotate();
+    if (selectedComponent == null)
+      return;
+    selectedComponent.rotate(locations);
     repaint();
   }
 
-  public void zoomInSelectComponent() {}
+  public void zoomInSelectComponent() {
+    if (selectedComponent == null)
+      return;
+    selectedComponent.zoomIn(locations);
+    repaint();
+  }
 
-  public void zoomOutSelectComponent() {}
+  public void zoomOutSelectComponent() {
+    if (selectedComponent == null)
+      return;
+    selectedComponent.zoomOut(locations);
+    repaint();
+  }
 }

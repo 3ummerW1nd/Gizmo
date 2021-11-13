@@ -26,4 +26,14 @@ public class TriangleObstacle extends NormalComponent {
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
   }
+
+  @Override
+  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomIn(locations);
+  }
+
+  @Override
+  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomOut(locations);
+  }
 }
