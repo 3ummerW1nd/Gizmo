@@ -30,6 +30,9 @@ public class Ball extends Component {
   @Override
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
+    velocity = new Pair();
+    acceleration = new Pair();
+    center = new Pair();
     acceleration.setY(1);
     radius = 15;
     center.setX(box.getKey() * 30 + 15);

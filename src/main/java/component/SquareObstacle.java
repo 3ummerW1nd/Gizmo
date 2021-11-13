@@ -31,6 +31,7 @@ public class SquareObstacle extends NormalComponent {
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
     sideLength = 30;
+    upperLeft = new Pair();
     upperLeft.setX(box.getKey() * 30);
     upperLeft.setY(box.getValue() * 30);
   }
