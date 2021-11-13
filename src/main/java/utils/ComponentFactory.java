@@ -1,8 +1,8 @@
-package factory;
+package utils;
 
-import component.NormalComponent;
 import component.Ball;
 import component.Damper;
+import component.NormalComponent;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;

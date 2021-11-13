@@ -4,7 +4,7 @@ import component.*;
 import component.Component;
 import component.rail.CurvedRail;
 import component.rail.StraightRail;
-import factory.ComponentFactory;
+import utils.ComponentFactory;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -105,75 +105,36 @@ public class GamePanel extends JPanel {
   }
 
   private void deleteComponent(Component component) {
-    //    List<Map.Entry<Integer, Integer>> list = component.getOwn();
-    //    for (Map.Entry<Integer, Integer> m : list) {
-    //      locations.remove(m);
-    //      System.out.println(m);
-    //    }
-//    for (Map.Entry<Map.Entry<Integer, Integer>, Component> it : locations.entrySet()) {
-//      if (it.getValue().equals(component)) {
-//        locations.remove(it);
-//        System.out.println(it);
-//      }
-//    }
-    Collection<Component> values = locations.values();
-    while (values.contains(component))
-      values.remove(component);
-    component.remove();
+    component.remove(locations);
     remove(component.getLabel());
     repaint();
   }
 
   public void removeSelectComponent() {
-    if(selectedComponent == null)
+    if (selectedComponent == null)
       return;
     deleteComponent(selectedComponent);
     selectedComponent = null;
   }
 
   public void rotateSelectComponent() {
-    if(selectedComponent == null)
+    if (selectedComponent == null)
       return;
-    selectedComponent.rotate();
+    selectedComponent.rotate(locations);
     repaint();
   }
 
   public void zoomInSelectComponent() {
-    if(selectedComponent == null)
+    if (selectedComponent == null)
       return;
-    int initX = selectedComponent.getInit().getKey();
-    int initY = selectedComponent.getInit().getValue();
-    int size = selectedComponent.getSize();
-    if (initX + size < 20 && initY + size < 20 && !locations.containsKey(Map.entry(initX + size, initY + size))) {
-      for (int i = 0; i < size; i++) {
-        if(locations.containsKey(Map.entry(initX + size, initY + i)) || locations.containsKey(Map.entry(initX + i, initY + size))) {
-          return;
-        }
-      }
-      locations.put(Map.entry(initX + size, initY + size), selectedComponent);
-      for (int i = 0; i < size; i++) {
-        locations.put(Map.entry(initX + size, initY + i), selectedComponent);
-        locations.put(Map.entry(initX + i, initY + size), selectedComponent);
-      }
-      selectedComponent.zoomIn();
-      repaint();
-    }
+    selectedComponent.zoomIn(locations);
+    repaint();
   }
 
   public void zoomOutSelectComponent() {
-    if(selectedComponent == null)
+    if (selectedComponent == null)
       return;
-    int initX = selectedComponent.getInit().getKey();
-    int initY = selectedComponent.getInit().getValue();
-    int size = selectedComponent.getSize();
-    if (size > 1) {
-      locations.remove(Map.entry(initX + size - 1, initY + size - 1));
-      for (int i = 0; i < size; i++) {
-        locations.remove(Map.entry(initX + size - 1, initY + i));
-        locations.remove(Map.entry(initX + i, initY + size - 1));
-      }
-      selectedComponent.zoomOut();
-      repaint();
-    }
+    selectedComponent.zoomOut(locations);
+    repaint();
   }
 }

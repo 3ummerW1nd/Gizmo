@@ -1,9 +1,8 @@
 package component;
 
+import java.util.Map;
 import javax.swing.*;
 import point.Point;
-
-import java.util.Map;
 
 /**
  * @program: Gizmo
@@ -25,5 +24,15 @@ public class CircleObstacle extends NormalComponent {
   @Override
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
+  }
+
+  @Override
+  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomIn(locations);
+  }
+
+  @Override
+  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomOut(locations);
   }
 }

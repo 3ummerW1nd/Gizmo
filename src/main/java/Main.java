@@ -1,9 +1,5 @@
-import component.Ball;
-import component.Damper;
-import component.TriangleObstacle;
 import javax.swing.*;
 
-import factory.ComponentFactory;
 import ui.GameWindow;
 
 /**

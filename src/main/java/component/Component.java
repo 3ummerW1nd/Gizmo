@@ -1,11 +1,10 @@
 package component;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
+import utils.ComponentUtil;
 
 /**
  * @program: Gizmo
@@ -31,37 +30,20 @@ public abstract class Component {
     label.setLocation((box.getKey() + 1) * 30, (box.getValue() + 1) * 30);
     init = box;
   }
-  public void rotate() {
-    angle = (angle + 1) % 4;
-    label.setIcon(ComponentImages.getAngleImage(type, angle, size));
+
+  public void rotate(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    ComponentUtil.rotateComponent(this, locations);
   }
-  public void zoomIn() {
-    // TODO:实现组件的放大
-    int initX = init.getKey();
-    int initY = init.getValue();
-    size ++;
-    int limit = size - 1;
-//    for(int i = 0; i < limit; i ++) {
-//      own.add(Map.entry(initX + limit, initY + i));
-//      own.add(Map.entry(initX + i, initY + limit));
-//    }
-//    own.add(Map.entry(initX + limit, initY + limit));
-    label.setSize(30*size, 30*size);
-    label.setIcon(ComponentImages.getAngleImage(type,angle,size));
-    System.out.println(label.getIcon().getIconHeight());
+
+  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    ComponentUtil.zoomInComponent(this, locations);
   }
-  public void zoomOut() {
-    // TODO:实现组件的缩小
-    size --;
-    System.out.println(size);
-//    int tmp = own.size();
-//    for(int i = tmp - 1; i >= tmp - size * 2 - 1; i --) {
-//      own.remove(i);
-//    }
-    label.setSize(30*size, 30*size);
-    label.setIcon(ComponentImages.getAngleImage(type, angle, size));
+
+  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    ComponentUtil.zoomOutComponent(this, locations);
   }
-  public void remove() {
-    // TODO:实现组件的删除
+
+  public void remove(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    ComponentUtil.removeComponent(this, locations);
   }
 }

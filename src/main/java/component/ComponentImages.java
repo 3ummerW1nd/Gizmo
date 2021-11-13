@@ -31,13 +31,14 @@ public class ComponentImages {
     List<Image> circleImages = new ArrayList<>();
     try {
       for (int i = 0; i < 4; i++) {
-          ballImages.add(ImageIO.read(new File("src/main/resources/ball" + i + ".png")));
-          absorberImages.add(ImageIO.read(new File("src/main/resources/absorber" + i + ".png")));
-          triangleImages.add(ImageIO.read(new File("src/main/resources/triangle" + i + ".png")));
-          squareImages.add(ImageIO.read(new File("src/main/resources/rectangle" + i + ".png")));
-          curvedRailImages.add(ImageIO.read(new File("src/main/resources/curvedRail" + i + ".png")));
-          straightRailImages.add(ImageIO.read(new File("src/main/resources/straightRail" + i + ".png")));
-          circleImages.add(ImageIO.read(new File("src/main/resources/circle" + i + ".png")));
+        ballImages.add(ImageIO.read(new File("src/main/resources/ball" + i + ".png")));
+        absorberImages.add(ImageIO.read(new File("src/main/resources/absorber" + i + ".png")));
+        triangleImages.add(ImageIO.read(new File("src/main/resources/triangle" + i + ".png")));
+        squareImages.add(ImageIO.read(new File("src/main/resources/rectangle" + i + ".png")));
+        curvedRailImages.add(ImageIO.read(new File("src/main/resources/curvedRail" + i + ".png")));
+        straightRailImages.add(
+            ImageIO.read(new File("src/main/resources/straightRail" + i + ".png")));
+        circleImages.add(ImageIO.read(new File("src/main/resources/circle" + i + ".png")));
       }
       damperImages.add(ImageIO.read(new File("src/main/resources/damper.png")));
     } catch (IOException e) {
@@ -54,7 +55,9 @@ public class ComponentImages {
   }
 
   public static ImageIcon getAngleImage(ComponentType componentType, int angle, int size) {
-    Image image = images.get(componentType).get(angle).getScaledInstance(size*30, size * 30, Image.SCALE_SMOOTH);
+    Image image = images.get(componentType)
+                      .get(angle)
+                      .getScaledInstance(size * 30, size * 30, Image.SCALE_SMOOTH);
     return new ImageIcon(image);
   }
 

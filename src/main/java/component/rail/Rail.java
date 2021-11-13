@@ -1,6 +1,8 @@
 package component.rail;
 
 import component.Ball;
+import component.Component;
+import component.ComponentImages;
 import component.NormalComponent;
 import lombok.Data;
 import point.Point;
@@ -29,9 +31,19 @@ public class Rail extends NormalComponent {
   }
 
   @Override
-  public void rotate() {
-    super.rotate();
+  public void rotate(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.rotate(locations);
     entranceX = (byte) ((entranceX + 1) % 4);
     entranceY = (byte) ((entranceY + 1) % 4);
+  }
+
+  @Override
+  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomIn(locations);
+  }
+
+  @Override
+  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomOut(locations);
   }
 }

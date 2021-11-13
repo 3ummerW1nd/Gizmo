@@ -21,15 +21,14 @@ public class Damper extends Component {
   }
 
   @Override
-  public void init(Map.Entry<Integer, Integer> box) {
-  }
+  public void init(Map.Entry<Integer, Integer> box) {}
 
   @Override
-  public void rotate() {}
+  public void rotate(Map<Map.Entry<Integer, Integer>, Component> locations) {}
 
   @Override
-  public void zoomIn() {}
+  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {}
 
   @Override
-  public void zoomOut() {}
+  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {}
 }
