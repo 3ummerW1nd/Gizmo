@@ -17,6 +17,7 @@ import java.util.List;
 public class ComponentFactory {
   private static Ball ball;
   private static Damper leftDamper, rightDamper;
+
   static {
     try {
       Class<?> ballClass = Class.forName(Ball.class.getName());

@@ -19,6 +19,7 @@ public class GameWindow extends JFrame {
   private int model = SETTING_MODEL;
   private GamePanel gamePanel;
   private SettingPanel settingPanel;
+
   public void initGameWindow() {
     setLayout(null);
     setTitle("弹球游戏");

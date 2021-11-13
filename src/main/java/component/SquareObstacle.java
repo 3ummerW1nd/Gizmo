@@ -2,9 +2,9 @@ package component;
 
 import java.util.Map;
 import javax.swing.*;
-import point.Point;
 import utils.ComponentImages;
 import utils.ComponentType;
+import pair.Pair;
 
 /**
  * @program: Gizmo
@@ -15,15 +15,15 @@ import utils.ComponentType;
 
 public class SquareObstacle extends NormalComponent {
   private int sideLength;
-  private int upperLeftX;
-  private int upperLeftY;
+  private Pair upperLeft;
+
   public SquareObstacle() {
     setType(ComponentType.RECTANGLE);
     setLabel(new JLabel(ComponentImages.getImage(getType())));
   }
 
   @Override
-  public Point checkCollision(Ball ball) {
+  public Pair checkCollision(Ball ball) {
     return null;
   }
 
@@ -31,9 +31,8 @@ public class SquareObstacle extends NormalComponent {
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
     sideLength = 30;
-    upperLeftX = box.getKey() * 30;
-    upperLeftY = box.getValue() * 30;
-    System.out.println(upperLeftX + " " + upperLeftY);
+    upperLeft.setX(box.getKey() * 30);
+    upperLeft.setY(box.getValue() * 30);
   }
 
   @Override

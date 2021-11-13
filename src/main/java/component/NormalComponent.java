@@ -1,10 +1,10 @@
 package component;
 
 import java.util.Map;
-import point.Point;
+import pair.Pair;
 
 public abstract class NormalComponent extends Component {
-  public abstract Point checkCollision(Ball ball);
+  public abstract Pair checkCollision(Ball ball);
 
   @Override
   public void rotate(Map<Map.Entry<Integer, Integer>, Component> locations) {

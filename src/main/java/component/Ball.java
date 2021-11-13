@@ -3,6 +3,7 @@ package component;
 import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
+import pair.Pair;
 import utils.ComponentImages;
 import utils.ComponentType;
 
@@ -15,9 +16,11 @@ import utils.ComponentType;
 
 @Data
 public class Ball extends Component {
-  private int velocityX, velocityY;
-  private int accelerationX, accelerationY;
-  private int centerX, centerY, radius;
+  private Pair velocity;
+  private Pair acceleration;
+  private Pair center;
+  private int radius;
+
   private Ball() {
     super();
     setType(ComponentType.BALL);
@@ -27,10 +30,9 @@ public class Ball extends Component {
   @Override
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
-    accelerationY = 1; // TODO: 选取一个合理的加速度
+    acceleration.setY(1);
     radius = 15;
-    centerX = box.getKey() * 30 + 15;
-    centerY = box.getValue() * 30 + 15;
-    System.out.println(centerX + " " + centerY);
+    center.setX(box.getKey() * 30 + 15);
+    center.setY(box.getValue() * 30 + 15);
   }
 }

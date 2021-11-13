@@ -23,9 +23,10 @@ public class ComponentUtil {
       List<Map.Entry<Integer, Integer>> list = new ArrayList<>();
       switch (component.getAngle()) {
         case 0:
-          for(int i = 0; i < size; i ++) {
-            for(int j = 0; j < size - i; j ++) {
-              if(locations.containsKey(Map.entry(initX + i, initY + j)) && !locations.get(Map.entry(initX + i, initY + j)).equals(component)) {
+          for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size - i; j++) {
+              if (locations.containsKey(Map.entry(initX + i, initY + j))
+                  && !locations.get(Map.entry(initX + i, initY + j)).equals(component)) {
                 return;
               }
               list.add(Map.entry(initX + i, initY + j));
@@ -33,9 +34,10 @@ public class ComponentUtil {
           }
           break;
         case 1:
-          for(int i = 0; i < size; i ++) {
-            for(int j = 0; j <= i; j ++) {
-              if(locations.containsKey(Map.entry(initX + i, initY + j)) && !locations.get(Map.entry(initX + i, initY + j)).equals(component)) {
+          for (int i = 0; i < size; i++) {
+            for (int j = 0; j <= i; j++) {
+              if (locations.containsKey(Map.entry(initX + i, initY + j))
+                  && !locations.get(Map.entry(initX + i, initY + j)).equals(component)) {
                 return;
               }
               list.add(Map.entry(initX + i, initY + j));
@@ -43,9 +45,10 @@ public class ComponentUtil {
           }
           break;
         case 2:
-          for(int i = 0; i < size; i ++) {
-            for(int j = size - 1; j >= size - 1 - i; j --) {
-              if(locations.containsKey(Map.entry(initX + i, initY + j)) && !locations.get(Map.entry(initX + i, initY + j)).equals(component)) {
+          for (int i = 0; i < size; i++) {
+            for (int j = size - 1; j >= size - 1 - i; j--) {
+              if (locations.containsKey(Map.entry(initX + i, initY + j))
+                  && !locations.get(Map.entry(initX + i, initY + j)).equals(component)) {
                 return;
               }
               list.add(Map.entry(initX + i, initY + j));
@@ -53,9 +56,10 @@ public class ComponentUtil {
           }
           break;
         case 3:
-          for(int i = 0; i < size; i ++) {
-            for(int j = size - 1; j >= i; j --) {
-              if(locations.containsKey(Map.entry(initX + i, initY + j)) && !locations.get(Map.entry(initX + i, initY + j)).equals(component)) {
+          for (int i = 0; i < size; i++) {
+            for (int j = size - 1; j >= i; j--) {
+              if (locations.containsKey(Map.entry(initX + i, initY + j))
+                  && !locations.get(Map.entry(initX + i, initY + j)).equals(component)) {
                 return;
               }
               list.add(Map.entry(initX + i, initY + j));
@@ -64,7 +68,7 @@ public class ComponentUtil {
           break;
       }
       removeComponent(component, locations);
-      for(Map.Entry<Integer, Integer> it : list) {
+      for (Map.Entry<Integer, Integer> it : list) {
         locations.put(it, component);
       }
     }
@@ -178,11 +182,11 @@ public class ComponentUtil {
             }
             break;
           case 3:
-            if(locations.containsKey(Map.entry(initX + size, initY + size)))
+            if (locations.containsKey(Map.entry(initX + size, initY + size)))
               return;
             for (int i = 0; i < size; i++) {
               if (locations.containsKey(Map.entry(initX + size, initY + i))
-                      || locations.containsKey(Map.entry(initX + i, initY + size))) {
+                  || locations.containsKey(Map.entry(initX + i, initY + size))) {
                 return;
               }
             }

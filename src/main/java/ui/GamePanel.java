@@ -8,9 +8,12 @@ import utils.ComponentFactory;
 import utils.ComponentType;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.*;
+import utils.ComponentFactory;
 
 /**
  * @program: Gizmo
@@ -27,6 +30,19 @@ public class GamePanel extends JPanel {
   private List<NormalComponent> components;
   private Component selectedComponent;
 
+  public GamePanel() {
+    setLayout(null);
+    setSize(630, 630);
+    components = new ArrayList<>();
+    typeComponentMap = new HashMap<>();
+    locations = new HashMap<>();
+    initTypeComponentMap();
+  }
+
+  public Component getSelectedComponent() {
+    return selectedComponent;
+  }
+
   public void setSelectedComponent(Map.Entry<Integer, Integer> box) {
     if (!locations.containsKey(box))
       return;
@@ -37,15 +53,6 @@ public class GamePanel extends JPanel {
 
   public Map.Entry<Integer, Integer> checkBox(int x, int y) {
     return Map.entry(x / 30 - 1, y / 30 - 1);
-  }
-
-  public GamePanel() {
-    setLayout(null);
-    setSize(630, 630);
-    components = new ArrayList<>();
-    typeComponentMap = new HashMap<>();
-    locations = new HashMap<>();
-    initTypeComponentMap();
   }
 
   private void initTypeComponentMap() {
