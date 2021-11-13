@@ -1,9 +1,10 @@
 package component;
 
-import java.util.Collection;
 import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
+import utils.ComponentImages;
+import utils.ComponentType;
 import utils.ComponentUtil;
 
 /**

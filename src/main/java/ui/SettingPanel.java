@@ -1,7 +1,7 @@
 package ui;
 
-import component.ComponentImages;
-import component.ComponentType;
+import utils.ComponentImages;
+import utils.ComponentType;
 import javax.swing.*;
 import ui.button.IconButton;
 import ui.button.TextButton;
@@ -110,10 +110,10 @@ public class SettingPanel extends JPanel {
     JLabel rectangleLabel = new JLabel(ComponentImages.getImage(ComponentType.RECTANGLE));
     JLabel circleLabel = new JLabel(ComponentImages.getImage(ComponentType.CIRCLE));
     JLabel triangleLabel = new JLabel(ComponentImages.getImage(ComponentType.TRIANGLE));
-    JLabel leftDamperLabel = new JLabel(ComponentImages.getImage(ComponentType.DAMPER));
+    JLabel leftDamperLabel = new JLabel(ComponentImages.getImage(ComponentType.LEFT_DAMPER));
     JLabel straightRailLabel = new JLabel(ComponentImages.getImage(ComponentType.STRAIGHT_RAIL));
     JLabel curvedRailLabel = new JLabel(ComponentImages.getImage(ComponentType.CURVED_RAIL));
-    JLabel rightDamperLabel = new JLabel(ComponentImages.getImage(ComponentType.DAMPER));
+    JLabel rightDamperLabel = new JLabel(ComponentImages.getImage(ComponentType.LEFT_DAMPER));
     JLabel selectLabel = new JLabel(new ImageIcon("src/main/resources/select.png"));
     settingModelLabel = new JLabel(new ImageIcon("src/main/resources/setting.png"));
     settingModelLabel.setSize(60, 60);
@@ -170,9 +170,9 @@ public class SettingPanel extends JPanel {
     curvedRailRadioButton = new JRadioButton();
     curvedRailRadioButton.setActionCommand(String.valueOf(ComponentType.CURVED_RAIL));
     leftDamperRadioButton = new JRadioButton();
-    leftDamperRadioButton.setActionCommand(String.valueOf(ComponentType.DAMPER) + "left");
+    leftDamperRadioButton.setActionCommand(String.valueOf(ComponentType.LEFT_DAMPER));
     rightDamperRadioButton = new JRadioButton();
-    rightDamperRadioButton.setActionCommand(String.valueOf(ComponentType.DAMPER) + "right");
+    rightDamperRadioButton.setActionCommand(String.valueOf(ComponentType.RIGHT_DAMPER));
     triangleRadioButton = new JRadioButton();
     triangleRadioButton.setActionCommand(String.valueOf(ComponentType.TRIANGLE));
     circleRadioButton = new JRadioButton();

@@ -1,7 +1,7 @@
 package component.rail;
 
-import component.ComponentImages;
-import component.ComponentType;
+import utils.ComponentImages;
+import utils.ComponentType;
 import javax.swing.*;
 import java.util.Map;
 

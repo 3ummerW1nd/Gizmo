@@ -3,6 +3,8 @@ package component;
 import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
+import utils.ComponentImages;
+import utils.ComponentType;
 
 /**
  * @program: Gizmo
@@ -30,20 +32,5 @@ public class Ball extends Component {
     centerX = box.getKey() * 30 + 15;
     centerY = box.getValue() * 30 + 15;
     System.out.println(centerX + " " + centerY);
-  }
-
-  @Override
-  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
-    super.zoomIn(locations);
-  }
-
-  @Override
-  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
-    super.zoomOut(locations);
-  }
-
-  @Override
-  public void remove(Map<Map.Entry<Integer, Integer>, Component> locations) {
-    super.remove(locations);
   }
 }

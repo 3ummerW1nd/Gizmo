@@ -4,6 +4,8 @@ import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
 import point.Point;
+import utils.ComponentImages;
+import utils.ComponentType;
 
 /**
  * @program: Gizmo
@@ -13,22 +15,16 @@ import point.Point;
  **/
 @Data
 public class Damper extends Component {
-  private Point Center;
+  private Point left;
   private int length;
   private Damper() {
-    setType(ComponentType.DAMPER);
-    setLabel(new JLabel(ComponentImages.getImage(getType())));
+    setLabel(new JLabel(ComponentImages.getImage(ComponentType.LEFT_DAMPER)));
   }
 
   @Override
-  public void init(Map.Entry<Integer, Integer> box) {}
-
-  @Override
-  public void rotate(Map<Map.Entry<Integer, Integer>, Component> locations) {}
-
-  @Override
-  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {}
-
-  @Override
-  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {}
+  public void init(Map.Entry<Integer, Integer> box) {
+    super.init(box);
+    getLabel().setSize(60, 30);
+    left = new Point(getInit().getKey() * 30, getInit().getValue() * 30 + 15);
+  }
 }

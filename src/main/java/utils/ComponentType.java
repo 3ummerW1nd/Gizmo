@@ -1,4 +1,4 @@
-package component;
+package utils;
 
 public enum ComponentType {
   BALL,
@@ -8,7 +8,8 @@ public enum ComponentType {
   TRIANGLE,
   RECTANGLE,
   CIRCLE,
-  DAMPER,
+  LEFT_DAMPER,
+  RIGHT_DAMPER,
   NONE,
   SELECT;
 
@@ -28,8 +29,10 @@ public enum ComponentType {
         return RECTANGLE;
       case "CIRCLE":
         return CIRCLE;
-      case "DAMPER":
-        return DAMPER;
+      case "LEFT_DAMPER":
+        return LEFT_DAMPER;
+      case "RIGHT_DAMPER":
+        return RIGHT_DAMPER;
       case "SELECT":
         return SELECT;
     }

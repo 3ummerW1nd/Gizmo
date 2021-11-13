@@ -1,8 +1,7 @@
 package utils;
 
 import component.Component;
-import component.ComponentImages;
-import component.ComponentType;
+
 import java.util.*;
 
 /**
@@ -15,6 +14,8 @@ import java.util.*;
 public class ComponentUtil {
   public static void rotateComponent(
       Component component, Map<Map.Entry<Integer, Integer>, Component> locations) {
+    if(component.getType() == ComponentType.LEFT_DAMPER || component.getType() == ComponentType.RIGHT_DAMPER)
+      return;
     if (component.getType() == ComponentType.TRIANGLE) {
       int size = component.getSize();
       int initX = component.getInit().getKey();
@@ -205,8 +206,10 @@ public class ComponentUtil {
           locations.put(it, component);
         }
         break;
-      case DAMPER:
+      case RIGHT_DAMPER:
+      case LEFT_DAMPER:
         // TODO 挡板放大
+        return;
     }
     component.setSize(size + 1);
     size = component.getSize();
@@ -315,7 +318,9 @@ public class ComponentUtil {
             break;
         }
         break;
-      case DAMPER:
+      case RIGHT_DAMPER:
+      case LEFT_DAMPER:
+        return;
     }
     component.setSize(size - 1);
     size = component.getSize();
@@ -327,7 +332,12 @@ public class ComponentUtil {
 
   public static void removeComponent(
       Component component, Map<Map.Entry<Integer, Integer>, Component> locations) {
+
     Collection<Component> values = locations.values();
-    while (values.contains(component)) values.remove(component);
+    while (values.contains(component)) {
+      System.out.println(component.getInit());
+      values.remove(component);
+      System.out.println(component.getType());
+    }
   }
 }

@@ -15,10 +15,8 @@ import java.util.List;
  **/
 
 public class ComponentFactory {
-  private static final int maxNumOfDamper = 2;
   private static Ball ball;
-  private static List<Damper> damperList = new ArrayList<>();
-  private static int countOfDamper = 0;
+  private static Damper leftDamper, rightDamper;
   static {
     try {
       Class<?> ballClass = Class.forName(Ball.class.getName());
@@ -28,9 +26,10 @@ public class ComponentFactory {
       ballConstructor.setAccessible(true);
       damperConstructor.setAccessible(true);
       ball = (Ball) ballConstructor.newInstance();
-      for (int i = 0; i < maxNumOfDamper; i++) {
-        damperList.add((Damper) damperConstructor.newInstance());
-      }
+      leftDamper = (Damper) damperConstructor.newInstance();
+      leftDamper.setType(ComponentType.LEFT_DAMPER);
+      rightDamper = (Damper) damperConstructor.newInstance();
+      rightDamper.setType(ComponentType.RIGHT_DAMPER);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -51,9 +50,11 @@ public class ComponentFactory {
     return ball;
   }
 
-  public static Damper getDamper() {
-    int tmp = countOfDamper % 2;
-    countOfDamper++;
-    return damperList.get(tmp);
+  public static Damper getLeftDamper() {
+    return leftDamper;
+  }
+
+  public static Damper getRightDamper() {
+    return rightDamper;
   }
 }

@@ -3,6 +3,8 @@ package component;
 import java.util.Map;
 import javax.swing.*;
 import point.Point;
+import utils.ComponentImages;
+import utils.ComponentType;
 
 /**
  * @program: Gizmo

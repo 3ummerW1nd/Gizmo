@@ -1,4 +1,4 @@
-package component;
+package utils;
 
 import java.awt.*;
 import java.io.File;
@@ -51,10 +51,16 @@ public class ComponentImages {
     images.put(ComponentType.CURVED_RAIL, curvedRailImages);
     images.put(ComponentType.STRAIGHT_RAIL, straightRailImages);
     images.put(ComponentType.CIRCLE, circleImages);
-    images.put(ComponentType.DAMPER, damperImages);
+    images.put(ComponentType.LEFT_DAMPER, damperImages);
   }
 
   public static ImageIcon getAngleImage(ComponentType componentType, int angle, int size) {
+    if(componentType == ComponentType.RIGHT_DAMPER || componentType == ComponentType.LEFT_DAMPER) {
+      Image image = images.get(ComponentType.LEFT_DAMPER)
+              .get(angle)
+              .getScaledInstance(size * 80, size * 30, Image.SCALE_SMOOTH);
+      return new ImageIcon(image);
+    }
     Image image = images.get(componentType)
                       .get(angle)
                       .getScaledInstance(size * 30, size * 30, Image.SCALE_SMOOTH);
@@ -62,6 +68,12 @@ public class ComponentImages {
   }
 
   public static ImageIcon getImage(ComponentType componentType) {
+    if(componentType == ComponentType.RIGHT_DAMPER || componentType == ComponentType.LEFT_DAMPER) {
+      Image image = images.get(ComponentType.LEFT_DAMPER)
+              .get(0)
+              .getScaledInstance(80, 30, Image.SCALE_SMOOTH);
+      return new ImageIcon(image);
+    }
     Image image = images.get(componentType).get(0).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     return new ImageIcon(image);
   }
