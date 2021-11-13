@@ -82,6 +82,8 @@ public class ComponentUtil {
     int initX = component.getInit().getKey();
     int initY = component.getInit().getValue();
     int size = component.getSize();
+    if (initX + size >= 20 || initY + size >= 20)
+      return;
     switch (component.getType()) {
       case BALL:
       case CIRCLE:
