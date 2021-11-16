@@ -1,26 +1,26 @@
 package geometry;
 
 public class Line {
-  private Point first, second;
+  private Point s, t;
 
   public Line(Point first, Point second) {
-    this.first = first;
-    this.second = second;
+    this.s = first;
+    this.t = second;
   }
 
-  public Point getFirst() {
-    return first;
+  public Point getS() {
+    return s;
   }
 
-  public void setFirst(Point first) {
-    this.first = first;
+  public void setS(Point s) {
+    this.s = s;
   }
 
-  public Point getSecond() {
-    return second;
+  public Point getT() {
+    return t;
   }
 
-  public void setSecond(Point second) {
-    this.second = second;
+  public void setT(Point t) {
+    this.t = t;
   }
 }
