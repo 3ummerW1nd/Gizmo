@@ -1,10 +1,10 @@
 package ui;
 
-import utils.ComponentType;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
 import javax.swing.*;
+import utils.ComponentType;
 
 /**
  * @program: Gizmo

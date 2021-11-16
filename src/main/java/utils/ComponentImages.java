@@ -36,9 +36,9 @@ public class ComponentImages {
         absorberImages.add(ImageIO.read(new File("src/main/resources/absorber" + i + ".png")));
         triangleImages.add(ImageIO.read(new File("src/main/resources/triangle" + i + ".png")));
         squareImages.add(ImageIO.read(new File("src/main/resources/rectangle" + i + ".png")));
-        curvedRailImages.add(ImageIO.read(new File("src/main/resources/curvedRail" + i + ".png")));
+        curvedRailImages.add(ImageIO.read(new File("src/main/resources/curvedrail" + i + ".png")));
         straightRailImages.add(
-            ImageIO.read(new File("src/main/resources/straightRail" + i + ".png")));
+            ImageIO.read(new File("src/main/resources/straightrail" + i + ".png")));
         circleImages.add(ImageIO.read(new File("src/main/resources/circle" + i + ".png")));
       }
       damperImages.add(ImageIO.read(new File("src/main/resources/damper.png")));
@@ -56,10 +56,10 @@ public class ComponentImages {
   }
 
   public static ImageIcon getAngleImage(ComponentType componentType, int angle, int size) {
-    if(componentType == ComponentType.RIGHT_DAMPER || componentType == ComponentType.LEFT_DAMPER) {
+    if (componentType == ComponentType.RIGHT_DAMPER || componentType == ComponentType.LEFT_DAMPER) {
       Image image = images.get(ComponentType.LEFT_DAMPER)
-              .get(angle)
-              .getScaledInstance(size * 80, size * 30, Image.SCALE_SMOOTH);
+                        .get(angle)
+                        .getScaledInstance(size * 80, size * 30, Image.SCALE_SMOOTH);
       return new ImageIcon(image);
     }
     Image image = images.get(componentType)
@@ -69,10 +69,10 @@ public class ComponentImages {
   }
 
   public static ImageIcon getImage(ComponentType componentType) {
-    if(componentType == ComponentType.RIGHT_DAMPER || componentType == ComponentType.LEFT_DAMPER) {
+    if (componentType == ComponentType.RIGHT_DAMPER || componentType == ComponentType.LEFT_DAMPER) {
       Image image = images.get(ComponentType.LEFT_DAMPER)
-              .get(0)
-              .getScaledInstance(80, 30, Image.SCALE_SMOOTH);
+                        .get(0)
+                        .getScaledInstance(80, 30, Image.SCALE_SMOOTH);
       return new ImageIcon(image);
     }
     Image image = images.get(componentType).get(0).getScaledInstance(30, 30, Image.SCALE_SMOOTH);

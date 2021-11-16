@@ -1,7 +1,6 @@
 package utils;
 
 import component.Component;
-
 import java.util.*;
 
 /**
@@ -14,7 +13,8 @@ import java.util.*;
 public class ComponentUtil {
   public static void rotateComponent(
       Component component, Map<Map.Entry<Integer, Integer>, Component> locations) {
-    if(component.getType() == ComponentType.LEFT_DAMPER || component.getType() == ComponentType.RIGHT_DAMPER)
+    if (component.getType() == ComponentType.LEFT_DAMPER
+        || component.getType() == ComponentType.RIGHT_DAMPER)
       return;
     if (component.getType() == ComponentType.TRIANGLE) {
       int size = component.getSize();
@@ -96,7 +96,7 @@ public class ComponentUtil {
           for (int i = 0; i < size + 1; i++) {
             for (int j = 0; j < size + 1; j++) {
               int tempX = initX + i, tempY = initY + j;
-              int diX = 0, diY = 0;
+              int diX, diY;
               if (i < tmp) {
                 diX = (tempX + 1) * 30 - centerX;
                 if (j < tmp) {
@@ -242,7 +242,7 @@ public class ComponentUtil {
         for (int i = 0; i < size - 1; i++) {
           for (int j = 0; j < size - 1; j++) {
             int tempX = initX + i, tempY = initY + j;
-            int diX = 0, diY = 0;
+            int diX, diY;
             if (i < tmp) {
               diX = (tempX + 1) * 30 - centerX;
               if (j < tmp) {
@@ -338,7 +338,6 @@ public class ComponentUtil {
 
   public static void removeComponent(
       Component component, Map<Map.Entry<Integer, Integer>, Component> locations) {
-
     Collection<Component> values = locations.values();
     while (values.contains(component)) {
       System.out.println(component.getInit());

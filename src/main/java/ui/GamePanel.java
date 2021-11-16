@@ -4,9 +4,6 @@ import component.*;
 import component.Component;
 import component.rail.CurvedRail;
 import component.rail.StraightRail;
-import utils.ComponentFactory;
-import utils.ComponentType;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.*;
 import utils.ComponentFactory;
+import utils.ComponentType;
 
 /**
  * @program: Gizmo
@@ -79,20 +77,20 @@ public class GamePanel extends JPanel {
   }
 
   public void putComponent(Map.Entry<Integer, Integer> box, ComponentType componentType) {
-    if(box.getValue() < 0 || box.getKey() < 0)
+    if (box.getValue() < 0 || box.getKey() < 0)
       return;
-    if(componentType == ComponentType.LEFT_DAMPER || componentType == ComponentType.RIGHT_DAMPER) {
-      if(box.getKey() >= 19)
+    if (componentType == ComponentType.LEFT_DAMPER || componentType == ComponentType.RIGHT_DAMPER) {
+      if (box.getKey() >= 19)
         return;
       Map.Entry<Integer, Integer> tmp = Map.entry(box.getKey() + 1, box.getValue());
-      if(locations.containsKey(tmp) && !locations.get(tmp).getType().equals(componentType))
+      if (locations.containsKey(tmp) && !locations.get(tmp).getType().equals(componentType))
         return;
     }
     if (locations.containsKey(box)) {
       System.out.println("chongtu");
       return;
     }
-    Component component = null;
+    Component component;
     if (componentType == ComponentType.BALL) {
       if (ball == null)
         ball = ComponentFactory.getBall();
@@ -100,26 +98,25 @@ public class GamePanel extends JPanel {
         deleteComponent(ball);
       component = ball;
     } else if (componentType == ComponentType.LEFT_DAMPER) {
-      if(leftDamper == null)
+      if (leftDamper == null)
         leftDamper = ComponentFactory.getLeftDamper();
       else
         deleteComponent(leftDamper);
       component = leftDamper;
     } else if (componentType == ComponentType.RIGHT_DAMPER) {
-      if(rightDamper == null)
+      if (rightDamper == null)
         rightDamper = ComponentFactory.getRightDamper();
       else
         deleteComponent(rightDamper);
       component = rightDamper;
     } else {
-      component =
-          (Component) ComponentFactory.createNormalComponent(typeComponentMap.get(componentType));
+      component = ComponentFactory.createNormalComponent(typeComponentMap.get(componentType));
       components.add((NormalComponent) component);
     }
     component.init(box);
     locations.put(box, component);
     Map.Entry<Integer, Integer> tmp = Map.entry(box.getKey() + 1, box.getValue());
-    if(componentType == ComponentType.RIGHT_DAMPER || componentType == ComponentType.LEFT_DAMPER) {
+    if (componentType == ComponentType.RIGHT_DAMPER || componentType == ComponentType.LEFT_DAMPER) {
       locations.put(tmp, component);
     }
     JLabel jLabel = component.getLabel();

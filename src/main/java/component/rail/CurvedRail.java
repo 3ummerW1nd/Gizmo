@@ -1,9 +1,9 @@
 package component.rail;
 
+import java.util.Map;
+import javax.swing.*;
 import utils.ComponentImages;
 import utils.ComponentType;
-import javax.swing.*;
-import java.util.Map;
 
 /**
  * @program: Gizmo

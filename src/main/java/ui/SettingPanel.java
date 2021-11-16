@@ -1,10 +1,10 @@
 package ui;
 
-import utils.ComponentImages;
-import utils.ComponentType;
 import javax.swing.*;
 import ui.button.IconButton;
 import ui.button.TextButton;
+import utils.ComponentImages;
+import utils.ComponentType;
 
 /**
  * @program: Gizmo

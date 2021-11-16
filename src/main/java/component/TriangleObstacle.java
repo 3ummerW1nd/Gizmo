@@ -2,9 +2,9 @@ package component;
 
 import java.util.Map;
 import javax.swing.*;
+import pair.Pair;
 import utils.ComponentImages;
 import utils.ComponentType;
-import pair.Pair;
 
 /**
  * @program: Gizmo

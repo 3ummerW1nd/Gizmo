@@ -4,9 +4,6 @@ import component.Ball;
 import component.Damper;
 import component.NormalComponent;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @program: Gizmo
  * @description: 生产组件的工厂
