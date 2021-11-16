@@ -1,19 +1,26 @@
 package geometry;
 
-import pair.Pair;
-
 public class Point {
-  private Pair position;
+  private double x, y;
 
-  public Point(Pair position) {
-    this.position = position;
+  public Point(double x, double y) {
+    this.x = x;
+    this.y = y;
   }
 
-  public Pair getPosition() {
-    return position;
+  public double getX() {
+    return x;
   }
 
-  public void setPosition(Pair position) {
-    this.position = position;
+  public void setX(double x) {
+    this.x = x;
+  }
+
+  public double getY() {
+    return y;
+  }
+
+  public void setY(double y) {
+    this.y = y;
   }
 }
