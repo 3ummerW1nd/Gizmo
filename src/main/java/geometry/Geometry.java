@@ -32,4 +32,8 @@ public class Geometry {
       return pointToLineDistance(point, line);
     }
   }
+
+  public double pointToCircleDistance(Point point, Circle circle) {
+    return pointToPointDistance(point, circle.getCenter()) - circle.getRadius();
+  }
 }
