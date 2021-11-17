@@ -1,8 +1,8 @@
 package component;
 
+import geometry.Point;
 import java.util.Map;
 import javax.swing.*;
-import pair.Pair;
 import utils.ComponentImages;
 import utils.ComponentType;
 
@@ -35,7 +35,7 @@ public class Absorber extends NormalComponent {
   }
 
   @Override
-  public Pair checkCollision(Ball ball) {
+  public Point checkCollision(Ball ball) {
     return null;
   }
 }

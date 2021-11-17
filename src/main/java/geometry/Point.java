@@ -5,6 +5,11 @@ import java.util.Objects;
 public class Point {
   private double x, y;
 
+  public Point() {
+    this.x = 0;
+    this.y = 0;
+  }
+
   public Point(double x, double y) {
     this.x = x;
     this.y = y;
@@ -43,6 +48,10 @@ public class Point {
 
   public double dist() {
     return this.x * this.x + this.y * this.y;
+  }
+
+  public Point add(Point point) {
+    return new Point(this.x + point.getX(), this.y + point.getY());
   }
 
   public Point minus(Point point) {

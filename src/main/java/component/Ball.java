@@ -1,9 +1,10 @@
 package component;
 
+import geometry.Circle;
+import geometry.Point;
 import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
-import pair.Pair;
 import utils.ComponentImages;
 import utils.ComponentType;
 
@@ -16,10 +17,9 @@ import utils.ComponentType;
 
 @Data
 public class Ball extends Component {
-  private Pair velocity;
-  private Pair acceleration;
-  private Pair center;
-  private int radius;
+  private Point velocity;
+  private Point acceleration;
+  private Circle circle;
 
   private Ball() {
     super();
@@ -30,12 +30,10 @@ public class Ball extends Component {
   @Override
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
-    velocity = new Pair();
-    acceleration = new Pair();
-    center = new Pair();
+    velocity = new Point();
+    acceleration = new Point();
     acceleration.setY(1);
-    radius = 15;
-    center.setX(box.getKey() * 30 + 15);
-    center.setY(box.getValue() * 30 + 15);
+    circle.setCenter(new Point(box.getKey() * 30 + 15, box.getValue() * 30 + 15));
+    circle.setRadius(15);
   }
 }

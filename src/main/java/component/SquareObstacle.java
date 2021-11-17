@@ -1,8 +1,9 @@
 package component;
 
+import geometry.Line;
+import geometry.Point;
 import java.util.Map;
 import javax.swing.*;
-import pair.Pair;
 import utils.ComponentImages;
 import utils.ComponentType;
 
@@ -15,7 +16,7 @@ import utils.ComponentType;
 
 public class SquareObstacle extends NormalComponent {
   private int sideLength;
-  private Pair upperLeft;
+  private Point upperLeft;
 
   public SquareObstacle() {
     setType(ComponentType.RECTANGLE);
@@ -23,7 +24,8 @@ public class SquareObstacle extends NormalComponent {
   }
 
   @Override
-  public Pair checkCollision(Ball ball) {
+  public Point checkCollision(Ball ball) {
+    Line line = new Line(upperLeft, upperLeft.add(new Point(sideLength, 0)));
     return null;
   }
 
@@ -31,9 +33,7 @@ public class SquareObstacle extends NormalComponent {
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
     sideLength = 30;
-    upperLeft = new Pair();
-    upperLeft.setX(box.getKey() * 30);
-    upperLeft.setY(box.getValue() * 30);
+    upperLeft = new Point(box.getKey() * 30, box.getValue() * 30);
   }
 
   @Override

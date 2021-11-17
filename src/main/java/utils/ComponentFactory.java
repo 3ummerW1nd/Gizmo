@@ -4,6 +4,7 @@ import component.Ball;
 import component.Damper;
 import component.NormalComponent;
 import java.lang.reflect.Constructor;
+
 /**
  * @program: Gizmo
  * @description: 生产组件的工厂

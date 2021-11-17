@@ -3,9 +3,9 @@ package component.rail;
 import component.Ball;
 import component.Component;
 import component.NormalComponent;
+import geometry.Point;
 import java.util.Map;
 import lombok.Data;
-import pair.Pair;
 
 /**
  * @program: Gizmo
@@ -19,7 +19,7 @@ public class Rail extends NormalComponent {
   private byte entranceX, entranceY;
 
   @Override
-  public Pair checkCollision(Ball ball) {
+  public Point checkCollision(Ball ball) {
     return null;
   }
 
