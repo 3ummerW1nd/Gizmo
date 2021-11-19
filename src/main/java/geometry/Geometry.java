@@ -1,24 +1,24 @@
 package geometry;
 
 public class Geometry {
-  public double pointToPointDistance(Point a, Point b) {
+  public static double pointToPointDistance(Point a, Point b) {
     return Math.sqrt(
         Math.pow(Math.abs(a.getX() - b.getX()), 2) + Math.pow(Math.abs(a.getY() - b.getY()), 2));
   }
 
-  private double cross(Point s, Point t, Point o) {
+  private static double cross(Point s, Point t, Point o) {
     return s.minus(o).det(t.minus(o));
   }
 
-  public double pointToLineDistance(Point point, Line line) {
+  public static double pointToLineDistance(Point point, Line line) {
     return Math.abs(cross(line.getS(), line.getT(), point)) / line.getT().minus(line.getS()).dist();
   }
 
-  private int sgn(double x) {
+  private static int sgn(double x) {
     return Math.abs(x) < 1e-10 ? 0 : (x > 0 ? 1 : -1);
   }
 
-  public double pointToSegmentDistance(Point point, Line line) {
+  public static double pointToSegmentDistance(Point point, Line line) {
     if (line.getS() == line.getT()) {
       return point.minus(line.getS()).dist();
     }
@@ -33,7 +33,7 @@ public class Geometry {
     }
   }
 
-  public double pointToCircleDistance(Point point, Circle circle) {
+  public static double pointToCircleDistance(Point point, Circle circle) {
     return pointToPointDistance(point, circle.getCenter()) - circle.getRadius();
   }
 }
