@@ -23,6 +23,7 @@ public class Ball extends Component {
 
   private Ball() {
     super();
+    circle = new Circle();
     setType(ComponentType.BALL);
     setLabel(new JLabel(ComponentImages.getImage(getType())));
   }
