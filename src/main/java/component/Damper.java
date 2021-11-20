@@ -18,6 +18,20 @@ public class Damper extends Component {
   private Point left;
   private int length;
 
+  public void moveLeft() {
+    double x = left.getX();
+    left.setX(x - 30);
+    int labelX = getLabel().getX(), labelY = getLabel().getY();
+    getLabel().setLocation(labelX - 30, labelY);
+  }
+
+  public void moveRight() {
+    double x = left.getX();
+    left.setX(x + 30);
+    int labelX = getLabel().getX(), labelY = getLabel().getY();
+    getLabel().setLocation(labelX  + 30, labelY);
+  }
+
   public Point checkCollision(Ball ball){
     return new Point();
   }

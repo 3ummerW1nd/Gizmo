@@ -92,6 +92,8 @@ public class SettingPanel extends JPanel {
       removeButton.setEnabled(false);
       rotateButton.setEnabled(false);
       savingButton.setEnabled(false);
+      settingModelButton.setEnabled(true);
+      playingModelButton.setEnabled(false);
     } else {
       playingModelLabel.setVisible(false);
       settingModelLabel.setVisible(true);
@@ -101,6 +103,8 @@ public class SettingPanel extends JPanel {
       removeButton.setEnabled(true);
       rotateButton.setEnabled(true);
       savingButton.setEnabled(true);
+      settingModelButton.setEnabled(false);
+      playingModelButton.setEnabled(true);
     }
   }
 

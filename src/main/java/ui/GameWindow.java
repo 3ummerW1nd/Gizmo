@@ -1,7 +1,6 @@
 package ui;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Map;
 import javax.swing.*;
 import utils.ComponentType;
@@ -50,6 +49,7 @@ public class GameWindow extends JFrame {
       model = PLAYING_MODEL;
       settingPanel.setModel(PLAYING_MODEL);
       gamePanel.playGame();
+      gamePanel.requestFocus();
     });
     settingPanel.getSettingModelButton().addActionListener(e -> {
       model = SETTING_MODEL;

@@ -5,6 +5,8 @@ import component.Component;
 import component.rail.CurvedRail;
 import component.rail.StraightRail;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
 import java.util.Timer;
@@ -27,6 +29,7 @@ public class GamePanel extends JPanel {
   private List<NormalComponent> components;
   private Component selectedComponent;
   private Timer timer;
+  private String model;
 
   public GamePanel() {
     setLayout(null);
@@ -35,6 +38,48 @@ public class GamePanel extends JPanel {
     typeComponentMap = new HashMap<>();
     locations = new HashMap<>();
     initTypeComponentMap();
+    model = "PLAYING_MODEL";
+    addKeyListener(new KeyAdapter() {
+      @Override
+      public void keyPressed(KeyEvent e) {
+        if(model == "PLAYING_MODEL") {
+          switch (e.getKeyChar()) {
+            case 'a' :
+              if(leftDamper != null) {
+                if(leftDamper.getLeft().getX() > 0) {
+                  Map.Entry<Integer, Integer> box = leftDamper.getInit();
+                  putComponent(Map.entry(box.getKey() - 1, box.getValue()), ComponentType.LEFT_DAMPER);
+                }
+              }
+              break;
+            case 'd' :
+              if(leftDamper != null) {
+                if(leftDamper.getLeft().getX() + 60 < 600) {
+                  Map.Entry<Integer, Integer> box = leftDamper.getInit();
+                  putComponent(Map.entry(box.getKey() + 1, box.getValue()), ComponentType.LEFT_DAMPER);
+                }
+              }
+              break;
+            case 'j' :
+              if(rightDamper != null) {
+                if(rightDamper.getLeft().getX() > 0) {
+                  Map.Entry<Integer, Integer> box = rightDamper.getInit();
+                  putComponent(Map.entry(box.getKey() - 1, box.getValue()), ComponentType.RIGHT_DAMPER);
+                }
+              }
+              break;
+            case  'l' :
+              if(rightDamper != null) {
+                if(rightDamper.getLeft().getX() + 60 < 600) {
+                  Map.Entry<Integer, Integer> box = rightDamper.getInit();
+                  putComponent(Map.entry(box.getKey() + 1, box.getValue()), ComponentType.RIGHT_DAMPER);
+                }
+              }
+              break;
+          }
+        }
+      }
+    });
   }
 
   public void setSelectedComponent(Map.Entry<Integer, Integer> box) {
@@ -79,10 +124,16 @@ public class GamePanel extends JPanel {
       if (box.getKey() >= 19)
         return;
       Map.Entry<Integer, Integer> tmp = Map.entry(box.getKey() + 1, box.getValue());
-      if (locations.containsKey(tmp) && !locations.get(tmp).getType().equals(componentType))
+      if (locations.containsKey(tmp) && !locations.get(tmp).getType().equals(componentType)) {
         return;
+      }
     }
-    if (locations.containsKey(box)) {
+    if(componentType == ComponentType.LEFT_DAMPER || componentType == ComponentType.RIGHT_DAMPER) {
+      if(locations.containsKey(box) && !locations.get(box).getType().equals(componentType)) {
+        System.out.println("冲突");
+        return;
+      }
+    } else if (locations.containsKey(box)) {
       System.out.println("chongtu");
       return;
     }
@@ -156,11 +207,13 @@ public class GamePanel extends JPanel {
   }
 
   public void playGame() {
+    model = "PLAYING_MODEL";
     timer = new Timer();
     timer.schedule(new GizmoGame(), 0, 10);
   }
 
   public void stopGame() {
+    model = "SETTING_MODEL";
     timer.cancel();
   }
 
@@ -187,10 +240,14 @@ public class GamePanel extends JPanel {
     }
 
     public void run() {
-      ball.move();
-      add(ball.getLabel());
-      repaint();
-      checkCollision();
+      if(ball != null) {
+        ball.move();
+        add(ball.getLabel());
+        repaint();
+        checkCollision();
+      } else {
+        timer.cancel();
+      }
     }
   }
 
