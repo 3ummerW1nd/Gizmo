@@ -18,6 +18,11 @@ public class Damper extends Component {
   private Point left;
   private int length;
 
+  public Point checkCollision(Ball ball){
+    return new Point();
+  }
+
+
   private Damper() {
     setLabel(new JLabel(ComponentImages.getImage(ComponentType.LEFT_DAMPER)));
   }

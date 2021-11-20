@@ -5,10 +5,9 @@ import component.Component;
 import component.rail.CurvedRail;
 import component.rail.StraightRail;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
+import java.util.Timer;
 import javax.swing.*;
 import utils.ComponentFactory;
 import utils.ComponentType;
@@ -27,6 +26,7 @@ public class GamePanel extends JPanel {
   private Damper leftDamper, rightDamper;
   private List<NormalComponent> components;
   private Component selectedComponent;
+  private Timer timer;
 
   public GamePanel() {
     setLayout(null);
@@ -35,10 +35,6 @@ public class GamePanel extends JPanel {
     typeComponentMap = new HashMap<>();
     locations = new HashMap<>();
     initTypeComponentMap();
-  }
-
-  public Component getSelectedComponent() {
-    return selectedComponent;
   }
 
   public void setSelectedComponent(Map.Entry<Integer, Integer> box) {
@@ -158,4 +154,44 @@ public class GamePanel extends JPanel {
     selectedComponent.zoomOut(locations);
     repaint();
   }
+
+  public void playGame() {
+    timer = new Timer();
+    timer.schedule(new GizmoGame(), 0, 10);
+  }
+
+  public void stopGame() {
+    timer.cancel();
+  }
+
+  class GizmoGame extends TimerTask {
+    int i = 0;
+
+    public void checkCollision() {
+      for(NormalComponent component : components) {
+        component.checkCollision(ball);
+      }
+      if(leftDamper != null)
+        leftDamper.checkCollision(ball);
+      if(rightDamper != null)
+        rightDamper.checkCollision(ball);
+      geometry.Point center = ball.getCircle().getCenter(), velocity = ball.getVelocity();
+      double r = ball.getCircle().getRadius(), x = center.getX(), y = center.getY();
+      double velocityX = velocity.getX(), velocityY = velocity.getY();
+      if(x + r >= 600 || x - r <= 0) {
+        ball.getVelocity().setX(-velocityX);
+      }
+      if(y + r >= 600 || y - r <= 0) {
+        ball.getVelocity().setY(-velocityY);
+      }
+    }
+
+    public void run() {
+      ball.move();
+      add(ball.getLabel());
+      repaint();
+      checkCollision();
+    }
+  }
+
 }

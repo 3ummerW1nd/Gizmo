@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.util.Map;
 import javax.swing.*;
 import utils.ComponentType;
+import java.util.Timer;
 
 /**
  * @program: Gizmo
@@ -48,10 +49,12 @@ public class GameWindow extends JFrame {
     settingPanel.getPlayingModelButton().addActionListener(e -> {
       model = PLAYING_MODEL;
       settingPanel.setModel(PLAYING_MODEL);
+      gamePanel.playGame();
     });
     settingPanel.getSettingModelButton().addActionListener(e -> {
       model = SETTING_MODEL;
       settingPanel.setModel(SETTING_MODEL);
+      gamePanel.stopGame();
     });
     settingPanel.getRemoveButton().addActionListener(e -> { gamePanel.removeSelectComponent(); });
     settingPanel.getRotateButton().addActionListener(e -> { gamePanel.rotateSelectComponent(); });
