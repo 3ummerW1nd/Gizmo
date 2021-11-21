@@ -231,6 +231,7 @@ public class GamePanel extends JPanel {
       geometry.Point center = ball.getCircle().getCenter(), velocity = ball.getVelocity();
       double r = ball.getCircle().getRadius(), x = center.getX(), y = center.getY();
       double velocityX = velocity.getX(), velocityY = velocity.getY();
+      System.out.println(r + " " + x);
       if(x + r >= 600 || x - r <= 0) {
         ball.getVelocity().setX(-velocityX);
       }
@@ -241,6 +242,7 @@ public class GamePanel extends JPanel {
 
     public void run() {
       if(ball != null) {
+        System.out.println(components.size());
         ball.move();
         add(ball.getLabel());
         repaint();
