@@ -18,7 +18,7 @@ import utils.ComponentType;
  **/
 
 public class SquareObstacle extends NormalComponent {
-  private int sideLength;
+  private double sideLength;
   private Point upperLeft;
 
   public SquareObstacle() {
@@ -83,11 +83,14 @@ public class SquareObstacle extends NormalComponent {
   @Override
   public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
     super.zoomIn(locations);
+    sideLength += 30;
   }
 
   @Override
   public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
     super.zoomOut(locations);
+    if (sideLength > 30)
+      sideLength -= 30;
   }
 
   @Override
