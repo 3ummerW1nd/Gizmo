@@ -18,7 +18,6 @@ import utils.ComponentType;
  **/
 
 public class SquareObstacle extends NormalComponent {
-  private int sideLength;
   private Point upperLeft;
 
   public SquareObstacle() {
@@ -31,12 +30,12 @@ public class SquareObstacle extends NormalComponent {
     double radius = ball.getCircle().getRadius();
     Point center = ball.getCircle().getCenter();
     List<Line> lines = new ArrayList<>();
-    lines.add(new Line(upperLeft, upperLeft.add(new Point(sideLength, 0))));
-    lines.add(new Line(upperLeft, upperLeft.add(new Point(0, sideLength))));
+    lines.add(new Line(upperLeft, upperLeft.add(new Point(getSize(), 0))));
+    lines.add(new Line(upperLeft, upperLeft.add(new Point(0, getSize()))));
     lines.add(new Line(
-        upperLeft.add(new Point(sideLength, 0)), upperLeft.add(new Point(sideLength, sideLength))));
+        upperLeft.add(new Point(getSize(), 0)), upperLeft.add(new Point(getSize(), getSize()))));
     lines.add(new Line(
-        upperLeft.add(new Point(0, sideLength)), upperLeft.add(new Point(sideLength, sideLength))));
+        upperLeft.add(new Point(0, getSize())), upperLeft.add(new Point(getSize(), getSize()))));
     Line bestLine = null;
     for (var line : lines) {
       if (radius >= Geometry.pointToSegmentDistance(center, line)) {
@@ -71,7 +70,7 @@ public class SquareObstacle extends NormalComponent {
   @Override
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
-    sideLength = 30;
+    setSize(30);
     upperLeft = new Point(box.getKey() * 30, box.getValue() * 30);
   }
 
