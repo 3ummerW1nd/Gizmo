@@ -1,6 +1,7 @@
 package geometry;
 
 public class Geometry {
+
   public static double pointToPointDistance(Point a, Point b) {
     return Math.sqrt(
         Math.pow(Math.abs(a.getX() - b.getX()), 2) + Math.pow(Math.abs(a.getY() - b.getY()), 2));
@@ -33,7 +34,4 @@ public class Geometry {
     }
   }
 
-  public static double pointToCircleDistance(Point point, Circle circle) {
-    return pointToPointDistance(point, circle.getCenter()) - circle.getRadius();
-  }
 }
