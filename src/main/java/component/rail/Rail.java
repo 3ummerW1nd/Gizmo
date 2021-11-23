@@ -70,6 +70,7 @@ public class Rail extends NormalComponent {
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
     this.upperLeft = new Point(box.getKey() * 30, box.getValue() * 30);
+    sideLength = 30 * getSize();
   }
 
   @Override
