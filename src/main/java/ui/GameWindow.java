@@ -1,6 +1,7 @@
 package ui;
 
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -91,8 +92,7 @@ public class GameWindow extends JFrame {
       fileChooser.setFileFilter(new FileNameExtensionFilter("gizmo(*.gizmo)", "gizmo"));
       fileChooser.setMultiSelectionEnabled(false);
       result = fileChooser.showOpenDialog(this);
-    }
-    else {
+    } else {
       fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
       fileChooser.setSelectedFile(new File("test.gizmo"));
       result = fileChooser.showSaveDialog(this);
@@ -100,7 +100,7 @@ public class GameWindow extends JFrame {
     if (result == JFileChooser.APPROVE_OPTION) {
       file = fileChooser.getSelectedFile();
     }
-    if(!file.exists()){
+    if (!file.exists()) {
       try {
         file.createNewFile();
       } catch (IOException e) {

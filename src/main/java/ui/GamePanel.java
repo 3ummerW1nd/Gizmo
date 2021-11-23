@@ -1,6 +1,5 @@
 package ui;
 
-
 import component.*;
 import component.Component;
 import component.rail.CurvedRail;
@@ -9,14 +8,16 @@ import geometry.Point;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.List;
 import java.util.Timer;
 import javax.swing.*;
 import utils.ComponentFactory;
-import utils.ComponentSavingObject;
 import utils.ComponentType;
 
 /**
@@ -29,9 +30,9 @@ import utils.ComponentType;
 public class GamePanel extends JPanel {
   private final Map<Map.Entry<Integer, Integer>, Component> locations;
   private final Map<ComponentType, Class> typeComponentMap;
+  private final List<NormalComponent> components;
   private Ball ball;
   private Damper leftDamper, rightDamper;
-  private final List<NormalComponent> components;
   private Component selectedComponent;
   private Timer timer;
   private String model;
@@ -228,21 +229,22 @@ public class GamePanel extends JPanel {
   }
 
   public void saveGame(File file) {
-    try{
-      OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
-      if(ball != null) {
+    try {
+      OutputStreamWriter osw =
+          new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
+      if (ball != null) {
         osw.write(ball.save());
         osw.flush();
       }
-      if(leftDamper != null) {
+      if (leftDamper != null) {
         osw.write(leftDamper.save());
         osw.flush();
       }
-      if(rightDamper != null) {
+      if (rightDamper != null) {
         osw.write(rightDamper.save());
         osw.flush();
       }
-      for(Component component : components) {
+      for (Component component : components) {
         osw.write(component.save());
         osw.flush();
       }
@@ -252,11 +254,9 @@ public class GamePanel extends JPanel {
     }
   }
 
-  public void loadGame(File file) {
-  }
+  public void loadGame(File file) {}
 
   class GizmoGame extends TimerTask {
-
     private int mysgn(double x) {
       if (x > 0) {
         return 1;

@@ -1,12 +1,5 @@
 package component.rail;
 
-import component.Ball;
-import component.Component;
-import geometry.Geometry;
-import geometry.Line;
-import geometry.Point;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import javax.swing.*;
 import utils.ComponentImages;

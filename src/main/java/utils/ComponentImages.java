@@ -18,7 +18,7 @@ import javax.swing.*;
  **/
 
 public class ComponentImages {
-  private static Map<ComponentType, List<Image>> images;
+  private static final Map<ComponentType, List<Image>> images;
 
   static {
     images = new HashMap<>();
