@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.event.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Timer;
 import javax.swing.*;
@@ -79,6 +80,8 @@ public class GameWindow extends JFrame {
   }
 
   private File showFileOpenDialog(boolean read) {
+    File file = null;
+    int result = 0;
     JFileChooser fileChooser = new JFileChooser();
     // 设置默认显示的文件夹为当前文件夹
     fileChooser.setCurrentDirectory(new File("."));
@@ -87,14 +90,23 @@ public class GameWindow extends JFrame {
       fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
       fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("gizmo(*.gizmo)", "gizmo"));
       fileChooser.setFileFilter(new FileNameExtensionFilter("gizmo(*.gizmo)", "gizmo"));
-    } else
+      fileChooser.setMultiSelectionEnabled(false);
+      result = fileChooser.showOpenDialog(this);
+    }
+    else {
       fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-    // 设置是否允许多选
-    fileChooser.setMultiSelectionEnabled(false);
-    int result = fileChooser.showOpenDialog(this);
-    File file = null;
+      fileChooser.setSelectedFile(new File("test.gizmo"));
+      result = fileChooser.showSaveDialog(this);
+    }
     if (result == JFileChooser.APPROVE_OPTION) {
       file = fileChooser.getSelectedFile();
+    }
+    if(!file.exists()){
+      try {
+        file.createNewFile();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
     return file;
   }
