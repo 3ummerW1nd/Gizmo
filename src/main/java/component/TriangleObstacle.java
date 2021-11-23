@@ -94,19 +94,18 @@ public class TriangleObstacle extends NormalComponent {
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
     upperLeft = new Point(box.getKey() * 30, box.getValue() * 30);
-    sideLength = 30;
+    sideLength = 30 * getSize();
   }
 
   @Override
   public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
     super.zoomIn(locations);
-    sideLength += 30;
+    sideLength = 30 * getSize();
   }
 
   @Override
   public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
     super.zoomOut(locations);
-    if (sideLength > 30)
-      sideLength -= 30;
+    sideLength = 30 * getSize();
   }
 }

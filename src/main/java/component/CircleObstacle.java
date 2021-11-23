@@ -57,15 +57,18 @@ public class CircleObstacle extends NormalComponent {
   @Override
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
+    circle.setRadius(15 * getSize());
   }
 
   @Override
   public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
     super.zoomIn(locations);
+    circle.setRadius(15 * getSize());
   }
 
   @Override
   public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
     super.zoomOut(locations);
+    circle.setRadius(15 * getSize());
   }
 }
