@@ -1,7 +1,8 @@
 package ui;
 
-import static geometry.Geometry.sgn;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import component.*;
 import component.Component;
 import component.rail.CurvedRail;
@@ -10,12 +11,14 @@ import geometry.Point;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.List;
 import java.util.Timer;
 import javax.swing.*;
 import utils.ComponentFactory;
+import utils.ComponentSavingObject;
 import utils.ComponentType;
 
 /**
@@ -225,9 +228,27 @@ public class GamePanel extends JPanel {
     timer.cancel();
   }
 
-  public void saveGame(File file) {}
+  public void saveGame(File file) {
+    try{
+      OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
+      for(Component component : components) {
+        ComponentSavingObject componentSavingObject = new ComponentSavingObject();
+        componentSavingObject.setSize(component.getSize());
+        componentSavingObject.setAngle(component.getAngle());
+        componentSavingObject.setInit(component.getInit());
+        componentSavingObject.setType(component.getType());
+        JSONObject jsonObject = (JSONObject) JSON.toJSON(componentSavingObject);
+        osw.write(jsonObject.toJSONString());
+        osw.flush();
+      }
+      osw.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
-  public void readGame(File file) {}
+  public void readGame(File file) {
+  }
 
   class GizmoGame extends TimerTask {
     int i = 0;
