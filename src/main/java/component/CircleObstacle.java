@@ -5,7 +5,6 @@ import geometry.Geometry;
 import geometry.Point;
 import java.util.Map;
 import javax.swing.*;
-
 import lombok.Data;
 import utils.ComponentImages;
 import utils.ComponentType;

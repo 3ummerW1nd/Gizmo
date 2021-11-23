@@ -256,15 +256,15 @@ public class GamePanel extends JPanel {
   }
 
   class GizmoGame extends TimerTask {
-    int i = 0;
 
     private int mysgn(double x) {
-      if (x > 0)
+      if (x > 0) {
         return 1;
-      else if (Math.abs(x) <= 1e-6)
+      } else if (Math.abs(x) <= 1e-6) {
         return 1;
-      else
+      } else {
         return -1;
+      }
     }
 
     public void checkCollision() {
