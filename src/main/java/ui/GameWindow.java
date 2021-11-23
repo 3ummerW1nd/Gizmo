@@ -3,9 +3,9 @@ package ui;
 import java.awt.event.*;
 import java.io.File;
 import java.util.Map;
+import java.util.Timer;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import utils.ComponentType;
 
 /**
@@ -39,14 +39,10 @@ public class GameWindow extends JFrame {
   }
 
   private void addListeners() {
-    settingPanel.getSavingButton().addActionListener(e
-        -> {
-            gamePanel.saveGame(showFileOpenDialog(false));
-        });
-    settingPanel.getReadingButton().addActionListener(e
-        -> {
-            gamePanel.readGame(showFileOpenDialog(true));
-        });
+    settingPanel.getSavingButton().addActionListener(
+        e -> { gamePanel.saveGame(showFileOpenDialog(false)); });
+    settingPanel.getReadingButton().addActionListener(
+        e -> { gamePanel.readGame(showFileOpenDialog(true)); });
     settingPanel.getPlayingModelButton().addActionListener(e -> {
       model = PLAYING_MODEL;
       settingPanel.setModel(PLAYING_MODEL);
@@ -87,12 +83,11 @@ public class GameWindow extends JFrame {
     // 设置默认显示的文件夹为当前文件夹
     fileChooser.setCurrentDirectory(new File("."));
     // 设置文件选择的模式（只选文件、只选文件夹、文件和文件均可选）
-    if(read) {
+    if (read) {
       fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
       fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("gizmo(*.gizmo)", "gizmo"));
       fileChooser.setFileFilter(new FileNameExtensionFilter("gizmo(*.gizmo)", "gizmo"));
-    }
-    else
+    } else
       fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     // 设置是否允许多选
     fileChooser.setMultiSelectionEnabled(false);
@@ -103,5 +98,4 @@ public class GameWindow extends JFrame {
     }
     return file;
   }
-
 }

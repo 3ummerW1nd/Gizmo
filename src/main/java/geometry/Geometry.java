@@ -14,7 +14,7 @@ public class Geometry {
     return Math.abs(cross(line.getS(), line.getT(), point)) / line.getT().minus(line.getS()).dist();
   }
 
-  private static int sgn(double x) {
+  public static int sgn(double x) {
     return Math.abs(x) < 1e-10 ? 0 : (x > 0 ? 1 : -1);
   }
 

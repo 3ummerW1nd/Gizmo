@@ -17,7 +17,7 @@ import utils.ComponentType;
  **/
 @Data
 public class Damper extends Component {
-  private Point left;
+  private Point upperLeft;
   private int length;
 
   private Damper() {
@@ -25,29 +25,29 @@ public class Damper extends Component {
   }
 
   public void moveLeft() {
-    double x = left.getX();
-    left.setX(x - 30);
+    double x = upperLeft.getX();
+    upperLeft.setX(x - 30);
     int labelX = getLabel().getX(), labelY = getLabel().getY();
     getLabel().setLocation(labelX - 30, labelY);
   }
 
   public void moveRight() {
-    double x = left.getX();
-    left.setX(x + 30);
+    double x = upperLeft.getX();
+    upperLeft.setX(x + 30);
     int labelX = getLabel().getX(), labelY = getLabel().getY();
     getLabel().setLocation(labelX + 30, labelY);
   }
 
   public Point checkCollision(Ball ball) {
-    Line line = new Line(left, left.add(new Point(length, 0)));
+    Line line = new Line(upperLeft, upperLeft.add(new Point(length, 0)));
     Point center = ball.getCircle().getCenter();
     double dis = Geometry.pointToSegmentDistance(center, line);
-    if (dis == Geometry.pointToPointDistance(center, left)) {
-      return left;
+    if (dis == Geometry.pointToPointDistance(center, upperLeft)) {
+      return upperLeft;
     } else if (dis == Geometry.pointToPointDistance(center, line.getT())) {
       return line.getT();
     } else if (dis <= ball.getCircle().getRadius()) {
-      double ax = center.getX(), ay = center.getY(), sx = left.getX(), sy = left.getY(),
+      double ax = center.getX(), ay = center.getY(), sx = upperLeft.getX(), sy = upperLeft.getY(),
              tx = sx + length;
       double tmp = sx * sx - 2 * sx * tx + sy * sy - 2 * sy * sy + tx * tx + sy * sy;
       return new Point((ax * sx * sx - sx * sy * sy + ay * sx * sy - 2 * ax * sx * tx + sx * sy * sy
@@ -66,6 +66,8 @@ public class Damper extends Component {
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
     getLabel().setSize(60, 30);
-    left = new Point(getInit().getKey() * 30, getInit().getValue() * 30 + 15);
+    upperLeft = new Point(getInit().getKey() * 30, getInit().getValue() * 30 + 15);
+    System.out.println(upperLeft.getY());
+    length = 60;
   }
 }

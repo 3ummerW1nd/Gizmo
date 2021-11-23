@@ -1,9 +1,12 @@
 package ui;
 
+import static geometry.Geometry.sgn;
+
 import component.*;
 import component.Component;
 import component.rail.CurvedRail;
 import component.rail.StraightRail;
+import geometry.Point;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -12,8 +15,6 @@ import java.util.*;
 import java.util.List;
 import java.util.Timer;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import utils.ComponentFactory;
 import utils.ComponentType;
 
@@ -25,11 +26,11 @@ import utils.ComponentType;
  **/
 
 public class GamePanel extends JPanel {
-  private Map<Map.Entry<Integer, Integer>, Component> locations;
-  private Map<ComponentType, Class> typeComponentMap;
+  private final Map<Map.Entry<Integer, Integer>, Component> locations;
+  private final Map<ComponentType, Class> typeComponentMap;
   private Ball ball;
   private Damper leftDamper, rightDamper;
-  private List<NormalComponent> components;
+  private final List<NormalComponent> components;
   private Component selectedComponent;
   private Timer timer;
   private String model;
@@ -45,37 +46,41 @@ public class GamePanel extends JPanel {
     addKeyListener(new KeyAdapter() {
       @Override
       public void keyPressed(KeyEvent e) {
-        if(model == "PLAYING_MODEL") {
+        if (Objects.equals(model, "PLAYING_MODEL")) {
           switch (e.getKeyChar()) {
-            case 'a' :
-              if(leftDamper != null) {
-                if(leftDamper.getLeft().getX() > 0) {
+            case 'a':
+              if (leftDamper != null) {
+                if (leftDamper.getUpperLeft().getX() > 0) {
                   Map.Entry<Integer, Integer> box = leftDamper.getInit();
-                  putComponent(Map.entry(box.getKey() - 1, box.getValue()), ComponentType.LEFT_DAMPER);
+                  putComponent(
+                      Map.entry(box.getKey() - 1, box.getValue()), ComponentType.LEFT_DAMPER);
                 }
               }
               break;
-            case 'd' :
-              if(leftDamper != null) {
-                if(leftDamper.getLeft().getX() + 60 < 600) {
+            case 'd':
+              if (leftDamper != null) {
+                if (leftDamper.getUpperLeft().getX() + 60 < 600) {
                   Map.Entry<Integer, Integer> box = leftDamper.getInit();
-                  putComponent(Map.entry(box.getKey() + 1, box.getValue()), ComponentType.LEFT_DAMPER);
+                  putComponent(
+                      Map.entry(box.getKey() + 1, box.getValue()), ComponentType.LEFT_DAMPER);
                 }
               }
               break;
-            case 'j' :
-              if(rightDamper != null) {
-                if(rightDamper.getLeft().getX() > 0) {
+            case 'j':
+              if (rightDamper != null) {
+                if (rightDamper.getUpperLeft().getX() > 0) {
                   Map.Entry<Integer, Integer> box = rightDamper.getInit();
-                  putComponent(Map.entry(box.getKey() - 1, box.getValue()), ComponentType.RIGHT_DAMPER);
+                  putComponent(
+                      Map.entry(box.getKey() - 1, box.getValue()), ComponentType.RIGHT_DAMPER);
                 }
               }
               break;
-            case  'l' :
-              if(rightDamper != null) {
-                if(rightDamper.getLeft().getX() + 60 < 600) {
+            case 'l':
+              if (rightDamper != null) {
+                if (rightDamper.getUpperLeft().getX() + 60 < 600) {
                   Map.Entry<Integer, Integer> box = rightDamper.getInit();
-                  putComponent(Map.entry(box.getKey() + 1, box.getValue()), ComponentType.RIGHT_DAMPER);
+                  putComponent(
+                      Map.entry(box.getKey() + 1, box.getValue()), ComponentType.RIGHT_DAMPER);
                 }
               }
               break;
@@ -131,8 +136,8 @@ public class GamePanel extends JPanel {
         return;
       }
     }
-    if(componentType == ComponentType.LEFT_DAMPER || componentType == ComponentType.RIGHT_DAMPER) {
-      if(locations.containsKey(box) && !locations.get(box).getType().equals(componentType)) {
+    if (componentType == ComponentType.LEFT_DAMPER || componentType == ComponentType.RIGHT_DAMPER) {
+      if (locations.containsKey(box) && !locations.get(box).getType().equals(componentType)) {
         System.out.println("冲突");
         return;
       }
@@ -220,38 +225,83 @@ public class GamePanel extends JPanel {
     timer.cancel();
   }
 
-  public void saveGame(File file) {
+  public void saveGame(File file) {}
 
-  }
-
-  public void readGame(File file) {
-  }
+  public void readGame(File file) {}
 
   class GizmoGame extends TimerTask {
     int i = 0;
 
+    private int mysgn(double x) {
+      if (x >= 0)
+        return 1;
+      else
+        return -1;
+    }
+
     public void checkCollision() {
-      for(NormalComponent component : components) {
-        component.checkCollision(ball);
+      ArrayList<Point> collisionPoints = new ArrayList<>();
+      for (NormalComponent component : components) {
+        if (component.checkCollision(ball) != null) {
+          collisionPoints.add(component.checkCollision(ball));
+        }
       }
-      if(leftDamper != null)
-        leftDamper.checkCollision(ball);
-      if(rightDamper != null)
-        rightDamper.checkCollision(ball);
+      if (leftDamper != null) {
+        if (leftDamper.checkCollision(ball) != null) {
+          collisionPoints.add(leftDamper.checkCollision(ball));
+        }
+      }
+      if (rightDamper != null) {
+        if (rightDamper.checkCollision(ball) != null) {
+          collisionPoints.add(rightDamper.checkCollision(ball));
+        }
+      }
       geometry.Point center = ball.getCircle().getCenter(), velocity = ball.getVelocity();
-      double r = ball.getCircle().getRadius(), x = center.getX(), y = center.getY();
-      double velocityX = velocity.getX(), velocityY = velocity.getY();
-      System.out.println(r + " " + x);
-      if(x + r >= 600 || x - r <= 0) {
-        ball.getVelocity().setX(-velocityX);
+      double r = ball.getCircle().getRadius(), bx = center.getX(), by = center.getY();
+      double vx = velocity.getX(), vy = velocity.getY();
+      System.out.println(r + " " + bx);
+      if (bx + r >= 600 || bx - r <= 0) {
+        ball.getVelocity().setX(-vx);
       }
-      if(y + r >= 600 || y - r <= 0) {
-        ball.getVelocity().setY(-velocityY);
+      if (by + r >= 600 || by - r <= 0) {
+        ball.getVelocity().setY(-vy);
+      }
+      for (var i : collisionPoints) {
+        double rx = i.getX(), ry = i.getY();
+        double v = bx * bx - 2 * bx * rx + by * by - 2 * by * ry + rx * rx + ry * ry;
+        double x = -(vx * bx * bx + 2 * vy * bx * by - 2 * vx * bx * rx - 2 * vy * bx * ry
+                       - vx * by * by - 2 * vy * by * rx + 2 * vx * by * ry + vx * rx * rx
+                       + 2 * vy * rx * ry - vx * ry * ry)
+            / v;
+        double y = (vy * bx * bx - 2 * vx * bx * by - 2 * vy * bx * rx + 2 * vx * bx * ry
+                       - vy * by * by + 2 * vx * by * rx + 2 * vy * by * ry + vy * rx * rx
+                       - 2 * vx * rx * ry - vy * ry * ry)
+            / v;
+        if (!(mysgn(x) == mysgn(vx) && mysgn(y) != mysgn(vy))) {
+          x = (vx * bx * bx + 2 * vy * bx * by - 2 * vx * bx * rx - 2 * vy * bx * ry - vx * by * by
+                  - 2 * vy * by * rx + 2 * vx * by * ry + vx * rx * rx + 2 * vy * rx * ry
+                  - vx * ry * ry)
+              / v;
+          y = -(vy * bx * bx - 2 * vx * bx * by - 2 * vy * bx * rx + 2 * vx * bx * ry - vy * by * by
+                  + 2 * vx * by * rx + 2 * vy * by * ry + vy * rx * rx - 2 * vx * rx * ry
+                  - vy * ry * ry)
+              / v;
+        }
+        if (!(mysgn(x) == mysgn(vx) && mysgn(y) != mysgn(vy))) {
+          x = -vx;
+          y = -vy;
+        }
+        if (!(mysgn(x) == mysgn(vx) && mysgn(y) != mysgn(vy))) {
+          x = vx;
+          y = vy;
+        }
+        ball.getVelocity().setX(x);
+        ball.getVelocity().setY(y);
       }
     }
 
     public void run() {
-      if(ball != null) {
+      if (ball != null) {
         System.out.println(components.size());
         ball.move();
         add(ball.getLabel());
