@@ -7,10 +7,13 @@ import component.rail.StraightRail;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.*;
 import java.util.List;
 import java.util.Timer;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import utils.ComponentFactory;
 import utils.ComponentType;
 
@@ -217,6 +220,13 @@ public class GamePanel extends JPanel {
     timer.cancel();
   }
 
+  public void saveGame(File file) {
+
+  }
+
+  public void readGame(File file) {
+  }
+
   class GizmoGame extends TimerTask {
     int i = 0;
 
@@ -252,5 +262,4 @@ public class GamePanel extends JPanel {
       }
     }
   }
-
 }
