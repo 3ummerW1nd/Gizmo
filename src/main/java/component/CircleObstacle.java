@@ -62,18 +62,27 @@ public class CircleObstacle extends NormalComponent {
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
     circle = new Circle();
+    circle.setCenter(new Point(box.getKey() * 30 + 15, box.getValue() * 30 + 15));
     circle.setRadius(15 * getSize());
   }
 
   @Override
   public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
     super.zoomIn(locations);
-    circle.setRadius(15 * getSize());
+    circle.setRadius(circle.getRadius() + 15.0);
+    Point center = circle.getCenter();
+    double x = center.getX(), y = center.getY();
+    circle.getCenter().setX(x + 15.0);
+    circle.getCenter().setY(y + 15.0);
   }
 
   @Override
   public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
     super.zoomOut(locations);
-    circle.setRadius(15 * getSize());
+    circle.setRadius(circle.getRadius() - 15.0);
+    Point center = circle.getCenter();
+    double x = center.getX(), y = center.getY();
+    circle.getCenter().setX(x - 15.0);
+    circle.getCenter().setY(y - 15.0);
   }
 }
