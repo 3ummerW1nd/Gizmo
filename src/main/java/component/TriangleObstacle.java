@@ -61,7 +61,7 @@ public class TriangleObstacle extends NormalComponent {
     }
     Line bestLine = null;
     for (var line : lines) {
-      if (radius >= Geometry.pointToSegmentDistance(center, line)) {
+      if (radius > Geometry.pointToSegmentDistance(center, line)) {
         radius = Geometry.pointToSegmentDistance(center, line);
         bestLine = line;
       }

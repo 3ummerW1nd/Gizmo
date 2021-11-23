@@ -233,7 +233,9 @@ public class GamePanel extends JPanel {
     int i = 0;
 
     private int mysgn(double x) {
-      if (x >= 0)
+      if (x > 0)
+        return 1;
+      else if (Math.abs(x) <= 1e-6)
         return 1;
       else
         return -1;
@@ -277,24 +279,22 @@ public class GamePanel extends JPanel {
                        - vy * by * by + 2 * vx * by * rx + 2 * vy * by * ry + vy * rx * rx
                        - 2 * vx * rx * ry - vy * ry * ry)
             / v;
-        if (!(mysgn(x) == mysgn(vx) && mysgn(y) != mysgn(vy))) {
-          x = (vx * bx * bx + 2 * vy * bx * by - 2 * vx * bx * rx - 2 * vy * bx * ry - vx * by * by
-                  - 2 * vy * by * rx + 2 * vx * by * ry + vx * rx * rx + 2 * vy * rx * ry
-                  - vx * ry * ry)
-              / v;
-          y = -(vy * bx * bx - 2 * vx * bx * by - 2 * vy * bx * rx + 2 * vx * bx * ry - vy * by * by
-                  + 2 * vx * by * rx + 2 * vy * by * ry + vy * rx * rx - 2 * vx * rx * ry
-                  - vy * ry * ry)
-              / v;
-        }
-        if (!(mysgn(x) == mysgn(vx) && mysgn(y) != mysgn(vy))) {
-          x = -vx;
-          y = -vy;
-        }
-        if (!(mysgn(x) == mysgn(vx) && mysgn(y) != mysgn(vy))) {
-          x = vx;
-          y = vy;
-        }
+        //        if (!(mysgn(x) == mysgn(vx) && mysgn(y) != mysgn(vy))) {
+        //          x = (vx * bx * bx + 2 * vy * bx * by - 2 * vx * bx * rx - 2 * vy * bx * ry - vx
+        //          * by * by
+        //                  - 2 * vy * by * rx + 2 * vx * by * ry + vx * rx * rx + 2 * vy * rx * ry
+        //                  - vx * ry * ry)
+        //              / v;
+        //          y = -(vy * bx * bx - 2 * vx * bx * by - 2 * vy * bx * rx + 2 * vx * bx * ry - vy
+        //          * by * by
+        //                  + 2 * vx * by * rx + 2 * vy * by * ry + vy * rx * rx - 2 * vx * rx * ry
+        //                  - vy * ry * ry)
+        //              / v;
+        //        }
+        //        if (!(mysgn(x) == mysgn(vx) && mysgn(y) != mysgn(vy))) {
+        //          x = -vx;
+        //          y = -vy;
+        //        }
         ball.getVelocity().setX(x);
         ball.getVelocity().setY(y);
       }
