@@ -5,6 +5,8 @@ import geometry.Geometry;
 import geometry.Point;
 import java.util.Map;
 import javax.swing.*;
+
+import lombok.Data;
 import utils.ComponentImages;
 import utils.ComponentType;
 
@@ -14,13 +16,15 @@ import utils.ComponentType;
  * @author: 3ummerW1nd
  * @create: 2021-10-31 19:37
  **/
-
+@Data
 public class CircleObstacle extends NormalComponent {
   private Circle circle;
 
   public CircleObstacle() {
+    super();
     setType(ComponentType.CIRCLE);
     setLabel(new JLabel(ComponentImages.getImage(getType())));
+    circle = new Circle();
   }
 
   @Override
@@ -57,6 +61,7 @@ public class CircleObstacle extends NormalComponent {
   @Override
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
+    circle = new Circle();
     circle.setRadius(15 * getSize());
   }
 

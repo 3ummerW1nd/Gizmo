@@ -340,9 +340,7 @@ public class ComponentUtil {
       Component component, Map<Map.Entry<Integer, Integer>, Component> locations) {
     Collection<Component> values = locations.values();
     while (values.contains(component)) {
-      System.out.println(component.getInit());
       values.remove(component);
-      System.out.println(component.getType());
     }
   }
 }

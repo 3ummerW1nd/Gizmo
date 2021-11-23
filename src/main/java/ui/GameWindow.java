@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Timer;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import utils.ComponentType;
@@ -43,7 +42,7 @@ public class GameWindow extends JFrame {
     settingPanel.getSavingButton().addActionListener(
         e -> { gamePanel.saveGame(showFileOpenDialog(false)); });
     settingPanel.getReadingButton().addActionListener(
-        e -> { gamePanel.readGame(showFileOpenDialog(true)); });
+        e -> { gamePanel.loadGame(showFileOpenDialog(true)); });
     settingPanel.getPlayingModelButton().addActionListener(e -> {
       model = PLAYING_MODEL;
       settingPanel.setModel(PLAYING_MODEL);

@@ -5,6 +5,7 @@ public class Circle {
   private double radius;
 
   public Circle() {
+    center = new Point();
   }
 
   public Circle(Point center, double radius) {

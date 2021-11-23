@@ -1,8 +1,6 @@
 package ui;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import component.*;
 import component.Component;
 import component.rail.CurvedRail;
@@ -185,6 +183,7 @@ public class GamePanel extends JPanel {
 
   private void deleteComponent(Component component) {
     component.remove(locations);
+    components.remove(component);
     remove(component.getLabel());
     repaint();
   }
@@ -231,14 +230,20 @@ public class GamePanel extends JPanel {
   public void saveGame(File file) {
     try{
       OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
+      if(ball != null) {
+        osw.write(ball.save());
+        osw.flush();
+      }
+      if(leftDamper != null) {
+        osw.write(leftDamper.save());
+        osw.flush();
+      }
+      if(rightDamper != null) {
+        osw.write(rightDamper.save());
+        osw.flush();
+      }
       for(Component component : components) {
-        ComponentSavingObject componentSavingObject = new ComponentSavingObject();
-        componentSavingObject.setSize(component.getSize());
-        componentSavingObject.setAngle(component.getAngle());
-        componentSavingObject.setInit(component.getInit());
-        componentSavingObject.setType(component.getType());
-        JSONObject jsonObject = (JSONObject) JSON.toJSON(componentSavingObject);
-        osw.write(jsonObject.toJSONString());
+        osw.write(component.save());
         osw.flush();
       }
       osw.close();
@@ -247,7 +252,7 @@ public class GamePanel extends JPanel {
     }
   }
 
-  public void readGame(File file) {
+  public void loadGame(File file) {
   }
 
   class GizmoGame extends TimerTask {
