@@ -1,8 +1,10 @@
 package ui;
 
 import com.alibaba.fastjson.JSON;
-import component.*;
+import component.Ball;
 import component.Component;
+import component.Damper;
+import component.NormalComponent;
 import geometry.Point;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -340,22 +342,6 @@ public class GamePanel extends JPanel {
                        - vy * by * by + 2 * vx * by * rx + 2 * vy * by * ry + vy * rx * rx
                        - 2 * vx * rx * ry - vy * ry * ry)
             / v;
-        //        if (!(mysgn(x) == mysgn(vx) && mysgn(y) != mysgn(vy))) {
-        //          x = (vx * bx * bx + 2 * vy * bx * by - 2 * vx * bx * rx - 2 * vy * bx * ry - vx
-        //          * by * by
-        //                  - 2 * vy * by * rx + 2 * vx * by * ry + vx * rx * rx + 2 * vy * rx * ry
-        //                  - vx * ry * ry)
-        //              / v;
-        //          y = -(vy * bx * bx - 2 * vx * bx * by - 2 * vy * bx * rx + 2 * vx * bx * ry - vy
-        //          * by * by
-        //                  + 2 * vx * by * rx + 2 * vy * by * ry + vy * rx * rx - 2 * vx * rx * ry
-        //                  - vy * ry * ry)
-        //              / v;
-        //        }
-        //        if (!(mysgn(x) == mysgn(vx) && mysgn(y) != mysgn(vy))) {
-        //          x = -vx;
-        //          y = -vy;
-        //        }
         ball.getVelocity().setX(x);
         ball.getVelocity().setY(y);
       }
