@@ -2,8 +2,6 @@ package component;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-
-import java.util.HashMap;
 import java.util.Map;
 import javax.swing.*;
 import lombok.AllArgsConstructor;

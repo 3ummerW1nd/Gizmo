@@ -3,7 +3,6 @@ package utils;
 import component.*;
 import component.rail.CurvedRail;
 import component.rail.StraightRail;
-
 import java.util.*;
 
 /**
@@ -14,7 +13,6 @@ import java.util.*;
  **/
 
 public class ComponentUtil {
-
   private static final Map<ComponentType, Class> typeComponentMap = new HashMap<>();
 
   static {

@@ -1,8 +1,7 @@
 package utils;
 
-import java.util.Map;
-
 import component.Component;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,24 +24,23 @@ public class ComponentSavingObject {
 
   public Component load(Map<Map.Entry<Integer, Integer>, Component> locations) {
     Component component = null;
-    if(type == ComponentType.BALL) {
+    if (type == ComponentType.BALL) {
       component = ComponentFactory.getBall();
-    } else if(type == ComponentType.LEFT_DAMPER) {
+    } else if (type == ComponentType.LEFT_DAMPER) {
       component = ComponentFactory.getLeftDamper();
-    } else if(type == ComponentType.RIGHT_DAMPER) {
+    } else if (type == ComponentType.RIGHT_DAMPER) {
       component = ComponentFactory.getRightDamper();
     } else {
       component = ComponentFactory.createNormalComponent(ComponentUtil.getComponentClass(type));
     }
     locations.put(Map.entry(initX, initY), component);
     component.init(Map.entry(initX, initY));
-    for(int i = 1; i < size; i ++) {
+    for (int i = 1; i < size; i++) {
       component.zoomIn(locations);
     }
-    for(int i = 0; i < size; i ++) {
+    for (int i = 0; i < size; i++) {
       component.rotate(locations);
     }
     return component;
   }
-
 }

@@ -153,7 +153,8 @@ public class GamePanel extends JPanel {
         deleteComponent(rightDamper);
       component = rightDamper;
     } else {
-      component = ComponentFactory.createNormalComponent(ComponentUtil.getComponentClass(componentType));
+      component =
+          ComponentFactory.createNormalComponent(ComponentUtil.getComponentClass(componentType));
       components.add((NormalComponent) component);
     }
     component.init(box);
@@ -216,7 +217,7 @@ public class GamePanel extends JPanel {
   }
 
   public void saveGame(File file) {
-    if(file == null)
+    if (file == null)
       return;
     try {
       OutputStreamWriter osw =
@@ -244,38 +245,40 @@ public class GamePanel extends JPanel {
   }
 
   public void loadGame(File file) {
-    if(file == null)
+    if (file == null)
       return;
     try {
-      InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
+      InputStreamReader inputStreamReader =
+          new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
       BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
       String line;
-      for(Component component : components) {
+      for (Component component : components) {
         remove(component.getLabel());
       }
       components.clear();
       locations.clear();
-      if(ball != null) {
+      if (ball != null) {
         remove(ball.getLabel());
         ball = null;
       }
-      if(leftDamper != null) {
+      if (leftDamper != null) {
         remove(leftDamper.getLabel());
         leftDamper = null;
       }
-      if(rightDamper != null) {
+      if (rightDamper != null) {
         remove(rightDamper.getLabel());
         rightDamper = null;
       }
-      while((line = bufferedReader.readLine())!=null){
-        ComponentSavingObject componentSavingObject = JSON.parseObject(line, ComponentSavingObject.class);
+      while ((line = bufferedReader.readLine()) != null) {
+        ComponentSavingObject componentSavingObject =
+            JSON.parseObject(line, ComponentSavingObject.class);
         Component component = componentSavingObject.load(locations);
         ComponentType type = component.getType();
-        if(type.equals(ComponentType.BALL)) {
+        if (type.equals(ComponentType.BALL)) {
           ball = (Ball) component;
-        } else if(type.equals(ComponentType.LEFT_DAMPER)) {
+        } else if (type.equals(ComponentType.LEFT_DAMPER)) {
           leftDamper = (Damper) component;
-        } else if(type.equals(ComponentType.RIGHT_DAMPER)) {
+        } else if (type.equals(ComponentType.RIGHT_DAMPER)) {
           rightDamper = (Damper) component;
         } else {
           components.add((NormalComponent) component);
