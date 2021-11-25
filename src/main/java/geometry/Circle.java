@@ -8,11 +8,6 @@ public class Circle {
     center = new Point();
   }
 
-  public Circle(Point center, double radius) {
-    this.center = center;
-    this.radius = radius;
-  }
-
   public Point getCenter() {
     return center;
   }

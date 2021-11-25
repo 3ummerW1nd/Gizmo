@@ -252,7 +252,6 @@ public class ComponentUtil {
       case BALL:
       case CIRCLE:
         Set<Map.Entry<Integer, Integer>> stay = new HashSet<>();
-        Set<Map.Entry<Integer, Integer>> all = new HashSet<>();
         int centerX = initX * 30 + (size - 1) * 15, centerY = initY * 30 + (size - 1) * 15,
             r = (size - 1) * 15;
         int tmp = (size - 1) / 2;

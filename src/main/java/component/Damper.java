@@ -6,6 +6,7 @@ import geometry.Point;
 import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import utils.ComponentImages;
 import utils.ComponentType;
 
@@ -15,6 +16,7 @@ import utils.ComponentType;
  * @author: 3ummerW1nd
  * @create: 2021-10-31 19:42
  **/
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class Damper extends Component {
   private Point upperLeft;

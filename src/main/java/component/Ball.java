@@ -5,6 +5,7 @@ import geometry.Point;
 import java.util.Map;
 import javax.swing.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import utils.ComponentImages;
 import utils.ComponentType;
 
@@ -15,6 +16,7 @@ import utils.ComponentType;
  * @create: 2021-10-31 19:36
  **/
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class Ball extends Component {
   private Point velocity;

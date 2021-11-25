@@ -41,9 +41,9 @@ public class GameWindow extends JFrame {
 
   private void addListeners() {
     settingPanel.getSavingButton().addActionListener(
-        e -> { gamePanel.saveGame(showFileOpenDialog(false)); });
+        e -> gamePanel.saveGame(showFileOpenDialog(false)));
     settingPanel.getReadingButton().addActionListener(
-        e -> { gamePanel.loadGame(showFileOpenDialog(true)); });
+        e -> gamePanel.loadGame(showFileOpenDialog(true)));
     settingPanel.getPlayingModelButton().addActionListener(e -> {
       model = PLAYING_MODEL;
       settingPanel.setModel(PLAYING_MODEL);
@@ -55,10 +55,10 @@ public class GameWindow extends JFrame {
       settingPanel.setModel(SETTING_MODEL);
       gamePanel.stopGame();
     });
-    settingPanel.getRemoveButton().addActionListener(e -> { gamePanel.removeSelectComponent(); });
-    settingPanel.getRotateButton().addActionListener(e -> { gamePanel.rotateSelectComponent(); });
-    settingPanel.getZoomInButton().addActionListener(e -> { gamePanel.zoomInSelectComponent(); });
-    settingPanel.getZoomOutButton().addActionListener(e -> { gamePanel.zoomOutSelectComponent(); });
+    settingPanel.getRemoveButton().addActionListener(e -> gamePanel.removeSelectComponent());
+    settingPanel.getRotateButton().addActionListener(e -> gamePanel.rotateSelectComponent());
+    settingPanel.getZoomInButton().addActionListener(e -> gamePanel.zoomInSelectComponent());
+    settingPanel.getZoomOutButton().addActionListener(e -> gamePanel.zoomOutSelectComponent());
     gamePanel.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
@@ -80,8 +80,8 @@ public class GameWindow extends JFrame {
   }
 
   private File showFileOpenDialog(boolean read) {
-    File file = null;
-    int result = 0;
+    File file;
+    int result;
     JFileChooser fileChooser = new JFileChooser();
     // 设置默认显示的文件夹为当前文件夹
     fileChooser.setCurrentDirectory(new File("."));

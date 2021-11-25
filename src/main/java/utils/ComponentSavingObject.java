@@ -23,7 +23,7 @@ public class ComponentSavingObject {
   private int angle;
 
   public Component load(Map<Map.Entry<Integer, Integer>, Component> locations) {
-    Component component = null;
+    Component component;
     if (type == ComponentType.BALL) {
       component = ComponentFactory.getBall();
     } else if (type == ComponentType.LEFT_DAMPER) {

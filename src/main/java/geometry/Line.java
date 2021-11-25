@@ -1,7 +1,8 @@
 package geometry;
 
 public class Line {
-  private Point s, t;
+  private final Point s;
+  private final Point t;
 
   public Line(Point first, Point second) {
     this.s = first;
@@ -12,15 +13,8 @@ public class Line {
     return s;
   }
 
-  public void setS(Point s) {
-    this.s = s;
-  }
-
   public Point getT() {
     return t;
   }
 
-  public void setT(Point t) {
-    this.t = t;
-  }
 }
