@@ -48,7 +48,7 @@ public class Ball extends Component {
     super.init(box);
     velocity = new Point(0, 0);
     acceleration = new Point();
-    acceleration.setY(0.0015);
+    acceleration.setY(0.00125);
     circle.setCenter(new Point(box.getKey() * 30 + 15, box.getValue() * 30 + 15));
     circle.setRadius(15);
   }

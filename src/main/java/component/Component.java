@@ -2,6 +2,8 @@ package component;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+
+import java.util.HashMap;
 import java.util.Map;
 import javax.swing.*;
 import lombok.AllArgsConstructor;
@@ -53,22 +55,14 @@ public abstract class Component {
     ComponentUtil.removeComponent(this, locations);
   }
 
-  public String save() {
+  public String save(Map<Map.Entry<Integer, Integer>, Component> locations) {
     ComponentSavingObject componentSavingObject = new ComponentSavingObject();
     componentSavingObject.setSize(getSize());
     componentSavingObject.setAngle(getAngle());
-    componentSavingObject.setInit(getInit());
+    componentSavingObject.setInitX(getInit().getKey());
+    componentSavingObject.setInitY(getInit().getValue());
     componentSavingObject.setType(getType());
     JSONObject jsonObject = (JSONObject) JSON.toJSON(componentSavingObject);
     return jsonObject.toJSONString() + "\r\n";
-  }
-
-  public void load(String string) {
-    ComponentSavingObject componentSavingObject =
-        JSONObject.parseObject(string, ComponentSavingObject.class);
-    setSize(componentSavingObject.getSize());
-    setAngle(componentSavingObject.getAngle());
-    setType(componentSavingObject.getType());
-    setInit(componentSavingObject.getInit());
   }
 }

@@ -1,24 +1,22 @@
 package ui;
 
+import com.alibaba.fastjson.JSON;
 import component.*;
 import component.Component;
-import component.rail.CurvedRail;
-import component.rail.StraightRail;
 import geometry.Point;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.List;
 import java.util.Timer;
 import javax.swing.*;
 import utils.ComponentFactory;
+import utils.ComponentSavingObject;
 import utils.ComponentType;
+import utils.ComponentUtil;
 
 /**
  * @program: Gizmo
@@ -29,7 +27,6 @@ import utils.ComponentType;
 
 public class GamePanel extends JPanel {
   private final Map<Map.Entry<Integer, Integer>, Component> locations;
-  private final Map<ComponentType, Class> typeComponentMap;
   private final List<NormalComponent> components;
   private Ball ball;
   private Damper leftDamper, rightDamper;
@@ -41,9 +38,7 @@ public class GamePanel extends JPanel {
     setLayout(null);
     setSize(630, 630);
     components = new ArrayList<>();
-    typeComponentMap = new HashMap<>();
     locations = new HashMap<>();
-    initTypeComponentMap();
     model = "PLAYING_MODEL";
     addKeyListener(new KeyAdapter() {
       @Override
@@ -104,15 +99,6 @@ public class GamePanel extends JPanel {
     return Map.entry(x / 30 - 1, y / 30 - 1);
   }
 
-  private void initTypeComponentMap() {
-    typeComponentMap.put(ComponentType.TRIANGLE, TriangleObstacle.class);
-    typeComponentMap.put(ComponentType.CIRCLE, CircleObstacle.class);
-    typeComponentMap.put(ComponentType.RECTANGLE, SquareObstacle.class);
-    typeComponentMap.put(ComponentType.STRAIGHT_RAIL, StraightRail.class);
-    typeComponentMap.put(ComponentType.CURVED_RAIL, CurvedRail.class);
-    typeComponentMap.put(ComponentType.ABSORBER, Absorber.class);
-  }
-
   @Override
   public void paint(Graphics g) {
     super.paint(g);
@@ -167,7 +153,7 @@ public class GamePanel extends JPanel {
         deleteComponent(rightDamper);
       component = rightDamper;
     } else {
-      component = ComponentFactory.createNormalComponent(typeComponentMap.get(componentType));
+      component = ComponentFactory.createNormalComponent(ComponentUtil.getComponentClass(componentType));
       components.add((NormalComponent) component);
     }
     component.init(box);
@@ -179,6 +165,7 @@ public class GamePanel extends JPanel {
     JLabel jLabel = component.getLabel();
     add(jLabel);
     repaint();
+    selectedComponent = component;
     System.out.println(locations);
   }
 
@@ -233,19 +220,19 @@ public class GamePanel extends JPanel {
       OutputStreamWriter osw =
           new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
       if (ball != null) {
-        osw.write(ball.save());
+        osw.write(ball.save(locations));
         osw.flush();
       }
       if (leftDamper != null) {
-        osw.write(leftDamper.save());
+        osw.write(leftDamper.save(locations));
         osw.flush();
       }
       if (rightDamper != null) {
-        osw.write(rightDamper.save());
+        osw.write(rightDamper.save(locations));
         osw.flush();
       }
       for (Component component : components) {
-        osw.write(component.save());
+        osw.write(component.save(locations));
         osw.flush();
       }
       osw.close();
@@ -254,7 +241,48 @@ public class GamePanel extends JPanel {
     }
   }
 
-  public void loadGame(File file) {}
+  public void loadGame(File file) {
+    try {
+      InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
+      BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+      String line;
+      for(Component component : components) {
+        remove(component.getLabel());
+      }
+      components.clear();
+      locations.clear();
+      if(ball != null) {
+        remove(ball.getLabel());
+        ball = null;
+      }
+      if(leftDamper != null) {
+        remove(leftDamper.getLabel());
+        leftDamper = null;
+      }
+      if(rightDamper != null) {
+        remove(rightDamper.getLabel());
+        rightDamper = null;
+      }
+      while((line = bufferedReader.readLine())!=null){
+        ComponentSavingObject componentSavingObject = JSON.parseObject(line, ComponentSavingObject.class);
+        Component component = componentSavingObject.load(locations);
+        ComponentType type = component.getType();
+        if(type.equals(ComponentType.BALL)) {
+          ball = (Ball) component;
+        } else if(type.equals(ComponentType.LEFT_DAMPER)) {
+          leftDamper = (Damper) component;
+        } else if(type.equals(ComponentType.RIGHT_DAMPER)) {
+          rightDamper = (Damper) component;
+        } else {
+          components.add((NormalComponent) component);
+        }
+        add(component.getLabel());
+        repaint();
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   class GizmoGame extends TimerTask {
     private int mysgn(double x) {

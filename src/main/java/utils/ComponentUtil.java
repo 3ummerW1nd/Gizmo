@@ -1,6 +1,9 @@
 package utils;
 
-import component.Component;
+import component.*;
+import component.rail.CurvedRail;
+import component.rail.StraightRail;
+
 import java.util.*;
 
 /**
@@ -11,6 +14,22 @@ import java.util.*;
  **/
 
 public class ComponentUtil {
+
+  private static final Map<ComponentType, Class> typeComponentMap = new HashMap<>();
+
+  static {
+    typeComponentMap.put(ComponentType.TRIANGLE, TriangleObstacle.class);
+    typeComponentMap.put(ComponentType.CIRCLE, CircleObstacle.class);
+    typeComponentMap.put(ComponentType.RECTANGLE, SquareObstacle.class);
+    typeComponentMap.put(ComponentType.STRAIGHT_RAIL, StraightRail.class);
+    typeComponentMap.put(ComponentType.CURVED_RAIL, CurvedRail.class);
+    typeComponentMap.put(ComponentType.ABSORBER, Absorber.class);
+  }
+
+  public static Class getComponentClass(ComponentType componentType) {
+    return typeComponentMap.get(componentType);
+  }
+
   public static void rotateComponent(
       Component component, Map<Map.Entry<Integer, Integer>, Component> locations) {
     if (component.getType() == ComponentType.LEFT_DAMPER
