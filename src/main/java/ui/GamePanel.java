@@ -216,6 +216,8 @@ public class GamePanel extends JPanel {
   }
 
   public void saveGame(File file) {
+    if(file == null)
+      return;
     try {
       OutputStreamWriter osw =
           new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
@@ -242,6 +244,8 @@ public class GamePanel extends JPanel {
   }
 
   public void loadGame(File file) {
+    if(file == null)
+      return;
     try {
       InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
       BufferedReader bufferedReader = new BufferedReader(inputStreamReader);

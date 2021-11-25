@@ -99,6 +99,8 @@ public class GameWindow extends JFrame {
     }
     if (result == JFileChooser.APPROVE_OPTION) {
       file = fileChooser.getSelectedFile();
+    } else {
+      return null;
     }
     if (!file.exists()) {
       try {
