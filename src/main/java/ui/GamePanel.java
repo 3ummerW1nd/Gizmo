@@ -294,16 +294,6 @@ public class GamePanel extends JPanel {
   }
 
   class GizmoGame extends TimerTask {
-    private int mysgn(double x) {
-      if (x > 0) {
-        return 1;
-      } else if (Math.abs(x) <= 1e-6) {
-        return 1;
-      } else {
-        return -1;
-      }
-    }
-
     public void checkCollision() {
       ArrayList<Point> collisionPoints = new ArrayList<>();
       for (NormalComponent component : components) {
