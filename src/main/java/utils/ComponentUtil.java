@@ -104,6 +104,7 @@ public class ComponentUtil {
     switch (component.getType()) {
       case BALL:
       case CIRCLE:
+      case ABSORBER:
         List<Map.Entry<Integer, Integer>> list = new ArrayList<>();
         List<Map.Entry<Integer, Integer>> delete = new ArrayList<>();
         int centerX = initX * 30 + (size + 1) * 15, centerY = initY * 30 + (size + 1) * 15,
@@ -152,7 +153,6 @@ public class ComponentUtil {
           }
         }
         break;
-      case ABSORBER:
       case RECTANGLE:
       case CURVED_RAIL:
       case STRAIGHT_RAIL:
@@ -251,6 +251,7 @@ public class ComponentUtil {
     switch (component.getType()) {
       case BALL:
       case CIRCLE:
+      case ABSORBER:
         Set<Map.Entry<Integer, Integer>> stay = new HashSet<>();
         int centerX = initX * 30 + (size - 1) * 15, centerY = initY * 30 + (size - 1) * 15,
             r = (size - 1) * 15;
@@ -292,7 +293,6 @@ public class ComponentUtil {
           locations.put(it, component);
         }
         break;
-      case ABSORBER:
       case RECTANGLE:
       case CURVED_RAIL:
       case STRAIGHT_RAIL:
