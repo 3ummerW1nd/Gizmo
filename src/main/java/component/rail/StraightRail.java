@@ -79,6 +79,6 @@ public class StraightRail extends Rail {
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
     setEntranceX(LEFT);
-    setEntranceX(RIGHT);
+    setEntranceY(RIGHT);
   }
 }

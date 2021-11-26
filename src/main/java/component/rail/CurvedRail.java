@@ -1,6 +1,7 @@
 package component.rail;
 
 import component.Ball;
+import component.Component;
 import geometry.Circle;
 import geometry.Geometry;
 import geometry.Point;
@@ -54,22 +55,22 @@ public class CurvedRail extends Rail {
       int tmpX = Geometry.sgn(x - cx), tmpY = Geometry.sgn(y - cy);
       switch (getAngle()) {
         case 0:
-          if (tmpX == 1 && tmpY == -1) {
+          if (tmpX == 1 && tmpY == 1) {
             return true;
           }
           break;
         case 1:
-          if (tmpX == -1 && tmpY == -1) {
-            return true;
-          }
-          break;
-        case 2:
           if (tmpX == -1 && tmpY == 1) {
             return true;
           }
           break;
+        case 2:
+          if (tmpX == -1 && tmpY == -1) {
+            return true;
+          }
+          break;
         default:
-          if (tmpX == 1 && tmpY == 1) {
+          if (tmpX == 1 && tmpY == -1) {
             return true;
           }
       }
@@ -81,7 +82,7 @@ public class CurvedRail extends Rail {
   public void init(Map.Entry<Integer, Integer> box) {
     super.init(box);
     setEntranceX(TOP);
-    setEntranceX(LEFT);
+    setEntranceY(LEFT);
     circle.setRadius(getSideLength());
     switch (getAngle()) {
       case 0:
@@ -96,5 +97,35 @@ public class CurvedRail extends Rail {
       default:
         circle.setCenter(getUpperLeft().add(new Point(0, getSideLength())));
     }
+  }
+
+  @Override
+  public void rotate(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.rotate(locations);
+    switch (getAngle()) {
+      case 0:
+        circle.setCenter(getUpperLeft());
+        break;
+      case 1:
+        circle.setCenter(getUpperLeft().add(new Point(getSideLength(), 0)));
+        break;
+      case 2:
+        circle.setCenter(getUpperLeft().add(new Point(getSideLength(), getSideLength())));
+        break;
+      default:
+        circle.setCenter(getUpperLeft().add(new Point(0, getSideLength())));
+    }
+  }
+
+  @Override
+  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomIn(locations);
+    circle.setRadius(getSideLength());
+  }
+
+  @Override
+  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
+    super.zoomOut(locations);
+    circle.setRadius(getSideLength());
   }
 }
