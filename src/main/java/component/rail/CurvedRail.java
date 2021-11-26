@@ -17,7 +17,7 @@ import utils.ComponentType;
  * @create: 2021-11-01 11:32
  **/
 public class CurvedRail extends Rail {
-  private Circle circle;
+  private final Circle circle;
 
   public CurvedRail() {
     super();

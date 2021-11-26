@@ -1,7 +1,6 @@
 package component;
 
 import geometry.Point;
-import java.util.Map;
 import javax.swing.*;
 import utils.ComponentImages;
 import utils.ComponentType;
@@ -23,7 +22,7 @@ public class Absorber extends CircleObstacle {
   @Override
   public Point checkCollision(Ball ball) {
     Point point = super.checkCollision(ball);
-    if(point != null) {
+    if (point != null) {
       ball.stop();
     }
     return point;

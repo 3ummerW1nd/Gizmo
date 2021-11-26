@@ -71,5 +71,4 @@ public class Ball extends Component {
     setVelocity(new Point(0, 0));
     setAcceleration(new Point(0, 0));
   }
-
 }

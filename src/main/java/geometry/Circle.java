@@ -39,5 +39,4 @@ public class Circle {
     this.getCenter().setX(x - 15.0);
     this.getCenter().setY(y - 15.0);
   }
-
 }
