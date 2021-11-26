@@ -23,4 +23,21 @@ public class Circle {
   public void setRadius(double radius) {
     this.radius = radius;
   }
+
+  public void zoomIn() {
+    this.setRadius(this.getRadius() + 15.0);
+    Point center = this.getCenter();
+    double x = center.getX(), y = center.getY();
+    this.getCenter().setX(x + 15.0);
+    this.getCenter().setY(y + 15.0);
+  }
+
+  public void zoomOut() {
+    this.setRadius(this.getRadius() - 15.0);
+    Point center = this.getCenter();
+    double x = center.getX(), y = center.getY();
+    this.getCenter().setX(x - 15.0);
+    this.getCenter().setY(y - 15.0);
+  }
+
 }

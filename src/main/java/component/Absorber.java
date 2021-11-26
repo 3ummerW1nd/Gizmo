@@ -13,29 +13,19 @@ import utils.ComponentType;
  * @create: 2021-10-31 19:39
  **/
 
-public class Absorber extends NormalComponent {
+public class Absorber extends CircleObstacle {
   public Absorber() {
+    super();
     setType(ComponentType.ABSORBER);
     setLabel(new JLabel(ComponentImages.getImage(getType())));
   }
 
   @Override
-  public void init(Map.Entry<Integer, Integer> box) {
-    super.init(box);
-  }
-
-  @Override
-  public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
-    super.zoomIn(locations);
-  }
-
-  @Override
-  public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
-    super.zoomOut(locations);
-  }
-
-  @Override
   public Point checkCollision(Ball ball) {
-    return null;
+    Point point = super.checkCollision(ball);
+    if(point != null) {
+      ball.stop();
+    }
+    return point;
   }
 }

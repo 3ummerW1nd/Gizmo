@@ -22,6 +22,12 @@ import utils.ComponentUtil;
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class Component {
+  /**
+   * size以格子为单位，代表组件的大小（边长或直径的格子数）[1,20]
+   * angle是指角度，由于每个组件有四个角度可能性（每次旋转90度），所以取值范围是[0, 3]
+   * type指定了组件的种类
+   * label是每个组件拥有的JLabel，用于在棋盘上显示组件
+   */
   private int size;
   private int angle;
   private Map.Entry<Integer, Integer> init;

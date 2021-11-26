@@ -298,6 +298,11 @@ public class GamePanel extends JPanel {
       ArrayList<Point> collisionPoints = new ArrayList<>();
       for (NormalComponent component : components) {
         if (component.checkCollision(ball) != null) {
+          if(component.getType() == ComponentType.ABSORBER) {
+            remove(ball.getLabel());
+            repaint();
+            timer.cancel();
+          }
           collisionPoints.add(component.checkCollision(ball));
         }
       }
