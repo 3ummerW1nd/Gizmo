@@ -295,7 +295,7 @@ public class GamePanel extends JPanel {
 
   class GizmoGame extends TimerTask {
     public void checkCollision() {
-      ArrayList<Point> collisionPoints = new ArrayList<>();
+      List<Point> collisionPoints = new ArrayList<>();
       for (NormalComponent component : components) {
         if (component.checkCollision(ball) != null) {
           if (component.getType() == ComponentType.ABSORBER) {
@@ -319,14 +319,13 @@ public class GamePanel extends JPanel {
       geometry.Point center = ball.getCircle().getCenter(), velocity = ball.getVelocity();
       double r = ball.getCircle().getRadius(), bx = center.getX(), by = center.getY();
       double vx = velocity.getX(), vy = velocity.getY();
-      System.out.println(r + " " + bx);
       if (bx + r >= 600 || bx - r <= 0) {
         ball.getVelocity().setX(-vx);
       }
       if (by + r >= 600 || by - r <= 0) {
         ball.getVelocity().setY(-vy);
       }
-      for (var i : collisionPoints) {
+      for (Point i : collisionPoints) {
         double rx = i.getX(), ry = i.getY();
         double v = bx * bx - 2 * bx * rx + by * by - 2 * by * ry + rx * rx + ry * ry;
         double x = -(vx * bx * bx + 2 * vy * bx * by - 2 * vx * bx * rx - 2 * vy * bx * ry
@@ -344,13 +343,34 @@ public class GamePanel extends JPanel {
 
     public void run() {
       if (ball != null) {
-        System.out.println(components.size());
         ball.move();
         add(ball.getLabel());
         repaint();
         checkCollision();
+//        checkGravity();
       } else {
         timer.cancel();
+      }
+    }
+
+    private void checkGravity() {
+      Point center = ball.getCircle().getCenter();
+      Component component = locations.get(checkBox((int) center.getX() + 30, (int) center.getY() + 30));
+      if(component == null) {
+        if (!ball.isAffectedByGravity()) {
+          ball.addGravity();
+        }
+        return;
+      }
+      ComponentType type = component.getType();
+      if(type.equals(ComponentType.CURVED_RAIL) || type.equals(ComponentType.STRAIGHT_RAIL)) {
+        if(ball.isAffectedByGravity()) {
+          ball.cancelGravity();
+        }
+      } else {
+        if (!ball.isAffectedByGravity()) {
+          ball.addGravity();
+        }
       }
     }
   }

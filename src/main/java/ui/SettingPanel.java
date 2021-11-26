@@ -46,10 +46,6 @@ public class SettingPanel extends JPanel {
     setSize(350, 680);
   }
 
-  public ButtonGroup getAllRadioButtons() {
-    return allRadioButtons;
-  }
-
   public JButton getSettingModelButton() {
     return settingModelButton;
   }

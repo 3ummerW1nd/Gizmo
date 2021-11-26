@@ -22,6 +22,8 @@ public class Ball extends Component {
   private Point velocity;
   private Point acceleration;
   private Circle circle;
+  private static final double ACCELERATION_OF_GRAVITY = 0.00125;
+  private boolean affectedByGravity;
 
   private Ball() {
     super();
@@ -50,7 +52,7 @@ public class Ball extends Component {
     super.init(box);
     velocity = new Point(0, 0);
     acceleration = new Point();
-    acceleration.setY(0.00125);
+    addGravity();
     circle.setCenter(new Point(box.getKey() * 30 + 15, box.getValue() * 30 + 15));
     circle.setRadius(15);
   }
@@ -71,4 +73,17 @@ public class Ball extends Component {
     setVelocity(new Point(0, 0));
     setAcceleration(new Point(0, 0));
   }
+
+  public void cancelGravity() {
+    double accelerationY = getAcceleration().getY();
+    getAcceleration().setY(accelerationY - ACCELERATION_OF_GRAVITY);
+    setAffectedByGravity(false);
+  }
+
+  public void addGravity() {
+    double accelerationY = getAcceleration().getY();
+    getAcceleration().setY(accelerationY + ACCELERATION_OF_GRAVITY);
+    setAffectedByGravity(true);
+  }
+
 }

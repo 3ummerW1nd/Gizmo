@@ -38,7 +38,7 @@ public class ComponentSavingObject {
     for (int i = 1; i < size; i++) {
       component.zoomIn(locations);
     }
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < angle; i++) {
       component.rotate(locations);
     }
     return component;
