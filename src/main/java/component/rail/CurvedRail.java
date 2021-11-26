@@ -83,7 +83,7 @@ public class CurvedRail extends Rail {
     super.init(box);
     setEntranceX(TOP);
     setEntranceY(LEFT);
-    circle.setRadius(getSideLength());
+    circle.setRadius(getSideLength() * 0.875);
     switch (getAngle()) {
       case 0:
         circle.setCenter(getUpperLeft());
@@ -120,12 +120,12 @@ public class CurvedRail extends Rail {
   @Override
   public void zoomIn(Map<Map.Entry<Integer, Integer>, Component> locations) {
     super.zoomIn(locations);
-    circle.setRadius(getSideLength());
+    circle.setRadius(getSideLength() * 0.875);
   }
 
   @Override
   public void zoomOut(Map<Map.Entry<Integer, Integer>, Component> locations) {
     super.zoomOut(locations);
-    circle.setRadius(getSideLength());
+    circle.setRadius(getSideLength() * 0.975);
   }
 }
